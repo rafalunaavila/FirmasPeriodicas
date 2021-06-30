@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using FirmasPeriodicas.CapaPD;
 using FirmasPeriodicas.Helper;
 using DPFP;
-
+using DPFP.Gui.Verification;
 
 namespace FirmasPeriodicas
 {
@@ -30,7 +30,6 @@ namespace FirmasPeriodicas
             }
         }
 
-
         public void Buscar_Personal_paraEditar(String xvalor)
         {
             try
@@ -47,7 +46,7 @@ namespace FirmasPeriodicas
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al buscar datos", "Advertencia de Seguridad", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Error al buscar datos "+ ex.Message, "Advertencia de Seguridad", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
         }
@@ -130,19 +129,5 @@ namespace FirmasPeriodicas
             }
         }
 
-        private void enrollmentControl1_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void EditarHuella_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

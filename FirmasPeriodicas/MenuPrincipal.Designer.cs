@@ -20,7 +20,7 @@
             base.Dispose(disposing);
         }
 
-          #region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
         /// <summary>
         /// Required method for Designer support - do not modify
@@ -234,7 +234,7 @@
             this.lbl_id.AutoSize = true;
             this.lbl_id.Font = new System.Drawing.Font("Lucida Bright", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbl_id.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lbl_id.Location = new System.Drawing.Point(42, 97);
+            this.lbl_id.Location = new System.Drawing.Point(71, 92);
             this.lbl_id.Name = "lbl_id";
             this.lbl_id.Size = new System.Drawing.Size(0, 18);
             this.lbl_id.TabIndex = 16;
@@ -631,8 +631,6 @@
         private System.Windows.Forms.Label lblnombre;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ListBox ListEvents;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private DPFP.Gui.Verification.VerificationControl verificationControl2;
         private System.Windows.Forms.Button btn_Salir;
         private System.Windows.Forms.ListView lsv_PerosnasHuella;
         private System.Windows.Forms.Label lbl_Total;
@@ -653,10 +651,12 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private DPFP.Gui.Verification.VerificationControl verificationControl2;
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
     }
 }

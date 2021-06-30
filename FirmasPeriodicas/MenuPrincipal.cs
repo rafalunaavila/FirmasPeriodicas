@@ -22,8 +22,7 @@ namespace FirmasPeriodicas
         public MenuPrincipal()
         {
             InitializeComponent();
-            mostrarComboVox();
-            Cargar_Todo_Asistencia();
+            
         }
 
         DBUsuario dbuser = new DBUsuario();
@@ -37,7 +36,7 @@ namespace FirmasPeriodicas
 
             Verificar = new DPFP.Verification.Verification();
             Resultado = new DPFP.Verification.Verification.Result();
- 
+
         }
 
         private void tabPage2_Click(object sender, EventArgs e)
@@ -79,10 +78,11 @@ namespace FirmasPeriodicas
             ListEvents.Items.Insert(0, String.Format("OnFingerRemove: {0}, finger{1}", ReaderSerialNumber, Finger));
 
         }
-
+        //AQUI REGISTRAMOS PERSONAS AL REGISTRO DE HUELLA
+        string nombre="";
         private void enrollmentControl1_OnEnroll(object Control, int FingerMask, DPFP.Template Template, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
         {
-            enrollmentControl1.Enabled = false;
+            
             byte[] bytes = null;
             if (Template is null)
             {
@@ -107,16 +107,15 @@ namespace FirmasPeriodicas
                     Template.Serialize(ref bytes);
                     insertUser.InsertarPRod(bytes, lbl_id.Text);
                     enrollmentControl1.Enabled = false;
-                    MessageBox.Show("La persona se ha registrado", "Informe del sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("La persona "+ nombre + " se ha registrado", "Informe del sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
 
 
             }
-            enrollmentControl1.Enabled = false;
             return;
         }
         #endregion
-
+        //SACAMOS EL ID DE LA PERSONA SELECCIONADA
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -124,6 +123,10 @@ namespace FirmasPeriodicas
             Object selectedItem = comboBox1.SelectedItem;
             var display = comboBox1.SelectedValue.ToString();
             lbl_id.Text = display;
+            string selected = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
+            nombre = selected;
+
+
         }
 
         #region REGISTRO DE ASISTENCIA
@@ -139,10 +142,11 @@ namespace FirmasPeriodicas
             DataTable datosPersona = new DataTable();
             int totalFilas = 0;
             string personaIdPersona = "";
-            string idregistro = ""; 
+            string idregistro = "";
+            string nombrePersona = "";
+
             try
             {
-               
                 bool encontro = false;
                 datosPersona = obj.mostrarUsersPH();
                 totalFilas = datosPersona.Rows.Count;
@@ -153,6 +157,7 @@ namespace FirmasPeriodicas
                     fingeprintByte = (byte[])xitem["fingerPrint"];
                     idregistro = Convert.ToString(xitem["idregistroHuella"]);
                     personaIdPersona = Convert.ToString(xitem["personaIdPersona"]);
+                    nombrePersona = Convert.ToString(xitem["Nombre"]);
                     templateDB.DeSerialize(fingeprintByte);
                     Verificar.Verify(FeatureSet, templateDB, ref Resultado);
                     if (Resultado.Verified == true)
@@ -161,7 +166,8 @@ namespace FirmasPeriodicas
                         Users objeto = new Users();
                         if (objeto.checarRegistroAsistecia(idregistro.Trim()) == true)
                         {
-                            MessageBox.Show("El usuario ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            objeto = null;
+                            MessageBox.Show("El usuario "+ nombrePersona +  " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                         }
                         else
@@ -170,7 +176,7 @@ namespace FirmasPeriodicas
                             MessageBox.Show("Asistencia registrada conexito", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                     }
-                
+
                 }
                 if (encontro == false)
                 {
@@ -179,24 +185,24 @@ namespace FirmasPeriodicas
                     DialogResult dialogResult = MessageBox.Show("La Huella no existe desea registrarse", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
                     if (dialogResult == DialogResult.Yes)
                     {
-                        tabControl1.SelectTab(1);
+                        tabControl1.SelectTab(0);
                     }
+
                     fil.Close();
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error del sistema "+ ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Error del sistema " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
-            enrollmentControl1.Enabled = false;
             Resultado.Verified = false;
             templateDB = null;
             return;
         }
         #endregion
-
+        //PARA MOVER EL PANEL DANDO CICK EN LA PARTE SUPERIOR
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -206,7 +212,7 @@ namespace FirmasPeriodicas
             }
         }
 
-    
+
 
         private void btn_Salir_Click(object sender, EventArgs e)
         {
@@ -241,7 +247,7 @@ namespace FirmasPeriodicas
 
         private void LlenarListviewPeronasHuella(DataTable data)
         {
-             var lis = lsv_PerosnasHuella;
+            var lis = lsv_PerosnasHuella;
             lis.Columns.Clear();
             lis.Items.Clear();
             lis.View = View.Details;
@@ -249,11 +255,11 @@ namespace FirmasPeriodicas
             lis.FullRowSelect = true;
             lis.Scrollable = true;
             lis.HideSelection = false;
-            lis.Columns.Add("ID",70 , HorizontalAlignment.Left);
+            lis.Columns.Add("ID", 70, HorizontalAlignment.Left);
             lis.Columns.Add("Nombre", 140, HorizontalAlignment.Left);
             lis.Columns.Add("Apellido Paterno", 110, HorizontalAlignment.Left);
             lis.Columns.Add("Apellido Materno", 110, HorizontalAlignment.Left);
-            lis.Columns.Add("Supervisor",150, HorizontalAlignment.Left);
+            lis.Columns.Add("Supervisor", 150, HorizontalAlignment.Left);
             lsv_PerosnasHuella.Items.Clear();
             for (int i = 0; i < data.Rows.Count; i++)
             {
@@ -264,7 +270,6 @@ namespace FirmasPeriodicas
                 list.SubItems.Add(dr["Materno"].ToString());
                 list.SubItems.Add(dr["Supervisor"].ToString());
                 lsv_PerosnasHuella.Items.Add(list);
-                var x = 0;
             }
             lbl_Total.Text = Convert.ToString(lsv_PerosnasHuella.Items.Count);
         }
@@ -281,7 +286,14 @@ namespace FirmasPeriodicas
 
         private void txt_buscador_TextChanged(object sender, EventArgs e)
         {
-
+            if (txt_buscador.Text.Trim().Length > 2)
+            {
+                Buscar_Personal_PorValor(txt_buscador.Text.Trim());
+            }
+            if(txt_buscador.Text.Trim().Length == 0)
+            {
+                Cargar_Todo_Asistencia();
+            }
         }
 
         private void Buscar_Personal_PorValor(String xvalor)
@@ -307,6 +319,7 @@ namespace FirmasPeriodicas
             {
                 Buscar_Personal_PorValor(txt_buscador.Text.Trim());
             }
+          
         }
 
         private void btn_update_Click(object sender, EventArgs e)
@@ -321,11 +334,12 @@ namespace FirmasPeriodicas
 
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
+            tabControl1.SelectTab(1);
 
-            Registro reg = new Registro();
-            Filtro fil = new Filtro();
-            fil.Show();
-            reg.Show();
+            //Registro reg = new Registro();
+            //Filtro fil = new Filtro();
+            //fil.Show();
+            //reg.Show();
 
         }
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
@@ -338,6 +352,7 @@ namespace FirmasPeriodicas
             }
             else
             {
+                verificationControl2.Active = false;
                 var lsv = lsv_PerosnasHuella.SelectedItems[0];
                 string idpersona = lsv_PerosnasHuella.SelectedItems[0].Text;
                 fil.Show();
@@ -372,26 +387,28 @@ namespace FirmasPeriodicas
 
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-            enrollmentControl1_OnReaderDisconnect();
+          if(e.TabPageIndex != 4)
+            {
+                mostrarComboVox();
+                Cargar_Todo_Asistencia();
+                
+            }
+            if (e.TabPageIndex == 1)
+            {      
+                verificationControl2.Active = false;
+            }
+            if (e.TabPageIndex == 2)
+            {
+                verificationControl2.Active = true;
+            }
+        }
 
-            enrollmentControl1_OnReaderConnect();
-
-
-            enrollmentControl1.Enabled = false;
-            Resultado.Verified = false;
-
-
-
-            System.Text.StringBuilder messageBoxCS = new System.Text.StringBuilder();
-            messageBoxCS.AppendFormat("{0} = {1}", "TabPage", e.TabPage);
-            messageBoxCS.AppendLine();
-            messageBoxCS.AppendFormat("{0} = {1}", "TabPageIndex", e.TabPageIndex);
-            messageBoxCS.AppendLine();
-            messageBoxCS.AppendFormat("{0} = {1}", "Action", e.Action);
-            messageBoxCS.AppendLine();
-            messageBoxCS.AppendFormat("{0} = {1}", "Cancel", e.Cancel);
-            messageBoxCS.AppendLine();
-            MessageBox.Show(messageBoxCS.ToString(), "Selecting Event");
+        private void tabControl1_Deselecting(object sender, TabControlCancelEventArgs e)
+        {
+            if (e.TabPageIndex == 2)
+            {
+               
+            }
         }
     }
 

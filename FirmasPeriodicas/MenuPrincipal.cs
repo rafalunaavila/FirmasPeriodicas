@@ -22,7 +22,7 @@ namespace FirmasPeriodicas
         public MenuPrincipal()
         {
             InitializeComponent();
-            
+            lbl_nomUser.Text = Cls_Libreria.NombreUsuario;
         }
 
         DBUsuario dbuser = new DBUsuario();
@@ -33,16 +33,15 @@ namespace FirmasPeriodicas
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
+            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
             Verificar = new DPFP.Verification.Verification();
             Resultado = new DPFP.Verification.Verification.Result();
-
+      
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
+    
 
         #region ENROLAMIENTO DE HUELLA EN REGISTRO PERSONA 
         private void enrollmentControl1_OnStartEnroll(object Control, string ReaderSerialNumber, int Finger)
@@ -87,7 +86,10 @@ namespace FirmasPeriodicas
             if (Template is null)
             {
                 Template.Serialize(ref bytes);
-                MessageBox.Show("La huella no se pudo registrar", "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Cls_Libreria.Mensajesistema = "La huella no se pudo registrar ";
+                FormDanger fw = new FormDanger();
+                fw.Show();
+                fw.CaragarDatos();
                 this.Tag = "";
                 this.Close();
             }
@@ -106,8 +108,13 @@ namespace FirmasPeriodicas
                 {
                     Template.Serialize(ref bytes);
                     insertUser.InsertarPRod(bytes, lbl_id.Text);
+                    Cls_Libreria.Mensajesistema = "La persona "+ nombre + " se ha registrado con exito ";
+                    FormInformation fw = new FormInformation();
+                    fw.Show();
+                    fw.CaragarDatos();
+                    tabControl1.SelectTab(2);
                     enrollmentControl1.Enabled = false;
-                    MessageBox.Show("La persona "+ nombre + " se ha registrado", "Informe del sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
 
 
@@ -125,7 +132,7 @@ namespace FirmasPeriodicas
             lbl_id.Text = display;
             string selected = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
             nombre = selected;
-
+            enrollmentControl1.Enabled = true;
 
         }
 
@@ -134,7 +141,8 @@ namespace FirmasPeriodicas
         private DPFP.Verification.Verification Verificar;
         private DPFP.Verification.Verification.Result Resultado;
 
-        private void verificationControl2_OnComplete_1(object Control, FeatureSet FeatureSet, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
+        string xFotoRuta;
+        public void verificationControl2_OnComplete_1(object Control, FeatureSet FeatureSet, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
         {
             DPFP.Template templateDB = new DPFP.Template();
             byte[] fingeprintByte;
@@ -144,6 +152,8 @@ namespace FirmasPeriodicas
             string personaIdPersona = "";
             string idregistro = "";
             string nombrePersona = "";
+            string PaternoPersona = "";
+            string MaternoPersona = "";
 
             try
             {
@@ -154,26 +164,36 @@ namespace FirmasPeriodicas
                 var datoPer = datosPersona.Rows[0];
                 foreach (DataRow xitem in datosPersona.Rows)
                 {
+              
                     fingeprintByte = (byte[])xitem["fingerPrint"];
                     idregistro = Convert.ToString(xitem["idregistroHuella"]);
                     personaIdPersona = Convert.ToString(xitem["personaIdPersona"]);
                     nombrePersona = Convert.ToString(xitem["Nombre"]);
+                    PaternoPersona = Convert.ToString(xitem["Paterno"]);
+                    MaternoPersona = Convert.ToString(xitem["Materno"]);
                     templateDB.DeSerialize(fingeprintByte);
                     Verificar.Verify(FeatureSet, templateDB, ref Resultado);
                     if (Resultado.Verified == true)
                     {
+                        Cls_Libreria.NombrePerson = nombrePersona;
+                        Cls_Libreria.PaternoPerson = PaternoPersona;
+                        Cls_Libreria.MaternoPerson = MaternoPersona;
+                        
+                        Cls_Libreria.Foto = Convert.ToString(xitem["rutaFoto"]);
                         encontro = true;
                         Users objeto = new Users();
                         if (objeto.checarRegistroAsistecia(idregistro.Trim()) == true)
                         {
                             objeto = null;
-                            MessageBox.Show("El usuario "+ nombrePersona +  " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("El usuario "+ nombrePersona + " " + PaternoPersona +" "+MaternoPersona +  " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                         }
                         else
                         {
                             insertUser.InsertarRegistroPP(Convert.ToDateTime(dateTimePicker1.Value), idregistro);
-                            MessageBox.Show("Asistencia registrada conexito", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            FormAsistencia fAsis = new FormAsistencia();
+                            fAsis.Show();
+                            fAsis.CaragarDatos();
                         }
                     }
 
@@ -199,6 +219,7 @@ namespace FirmasPeriodicas
             }
             Resultado.Verified = false;
             templateDB = null;
+           
             return;
         }
         #endregion
@@ -273,17 +294,7 @@ namespace FirmasPeriodicas
             }
             lbl_Total.Text = Convert.ToString(lsv_PerosnasHuella.Items.Count);
         }
-
-
-
-
         #endregion
-
-        private void lsv_PerosnasHuella_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void txt_buscador_TextChanged(object sender, EventArgs e)
         {
             if (txt_buscador.Text.Trim().Length > 2)
@@ -335,7 +346,6 @@ namespace FirmasPeriodicas
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             tabControl1.SelectTab(1);
-
             //Registro reg = new Registro();
             //Filtro fil = new Filtro();
             //fil.Show();
@@ -384,10 +394,13 @@ namespace FirmasPeriodicas
         {
             tabControl1.SelectTab(1);
         }
-
+        private void button4_Click(object sender, EventArgs e)
+        {
+            tabControl1.SelectTab(4);
+        }
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-          if(e.TabPageIndex != 4)
+          if(e.TabPageIndex != 3)
             {
                 mostrarComboVox();
                 Cargar_Todo_Asistencia();
@@ -396,19 +409,136 @@ namespace FirmasPeriodicas
             if (e.TabPageIndex == 1)
             {      
                 verificationControl2.Active = false;
+                verificationControl1.Active = false;
             }
-            if (e.TabPageIndex == 2)
+            if ((e.TabPageIndex == 2)||(e.TabPageIndex == 4))
             {
                 verificationControl2.Active = true;
+                verificationControl1.Active = true;
+                
+            }
+            if (e.TabPageIndex == 4)
+            {
+                verificationControl2.Active = false;
+                pictureBox12.Hide();
+            }
+            if (e.TabPageIndex != 4)
+            {
+                lbl_nombre.Text = "";
+                lbl_Supervisor.Text = "";
             }
         }
 
-        private void tabControl1_Deselecting(object sender, TabControlCancelEventArgs e)
+        private void label5_MouseMove(object sender, MouseEventArgs e)
         {
-            if (e.TabPageIndex == 2)
+            if (e.Button == MouseButtons.Left)
             {
-               
+                Utilitarios u = new Utilitarios();
+                u.Mover_formulario(this);
             }
+        }
+
+        private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Utilitarios u = new Utilitarios();
+                u.Mover_formulario(this);
+            }
+        }
+
+        private void label13_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Utilitarios u = new Utilitarios();
+                u.Mover_formulario(this);
+            }
+        }
+        //VERIFICACION DE PERSONA
+        private void verificationControl1_OnComplete(object Control, FeatureSet FeatureSet, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
+        {
+            DPFP.Template templateDB = new DPFP.Template();
+            byte[] fingeprintByte;
+            Users obj = new Users();
+            DataTable datosPersona = new DataTable();
+            int totalFilas = 0;
+            string personaIdPersona = "";
+            string idregistro = "";
+            string nombrePersona = "";
+            string PaternoPersona = "";
+            string MaternoPersona = "";
+            string personSuper = "";
+            string verFoto = "";
+
+            try
+            {
+                bool encontro = false;
+                datosPersona = obj.mostrarUsersPH();
+                totalFilas = datosPersona.Rows.Count;
+                if (datosPersona.Rows.Count <= 0) return;
+                var datoPer = datosPersona.Rows[0];
+                foreach (DataRow xitem in datosPersona.Rows)
+                {
+
+                    fingeprintByte = (byte[])xitem["fingerPrint"];
+                    idregistro = Convert.ToString(xitem["idregistroHuella"]);
+                    personaIdPersona = Convert.ToString(xitem["personaIdPersona"]);
+                    nombrePersona = Convert.ToString(xitem["Nombre"]);
+                    PaternoPersona = Convert.ToString(xitem["Paterno"]);
+                    MaternoPersona = Convert.ToString(xitem["Materno"]);
+                    personSuper = Convert.ToString(xitem["supervisor"]);
+                    templateDB.DeSerialize(fingeprintByte);
+                    Verificar.Verify(FeatureSet, templateDB, ref Resultado);
+                    if (Resultado.Verified == true)
+                    {
+                        pictureBox12.Show();
+                        lbl_nombre.Text = nombrePersona+" "+PaternoPersona+" "+MaternoPersona;
+                        lbl_Supervisor.Text = personSuper;
+                        verFoto = Convert.ToString(xitem["rutaFoto"]);
+                        pictureBox12.Load(@"http://10.6.60.190/Fotos/" + verFoto);
+                        int ancho = pictureBox12.Image.Width;
+                        int largo = pictureBox12.Image.Height;
+                        if (ancho > largo)
+                        {
+                            pictureBox12.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
+                        }
+                        encontro = true;
+                    }
+                }
+                if (encontro == false)
+                {
+                    Filtro fil = new Filtro();
+                    fil.Show();
+                    DialogResult dialogResult = MessageBox.Show("La Huella no existe desea registrarse", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        tabControl1.SelectTab(0);
+                    }
+
+                    fil.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error del sistema " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
+            Resultado.Verified = false;
+            templateDB = null;
+            return;
+
+        }
+
+        private void label12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbl_idregistro_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

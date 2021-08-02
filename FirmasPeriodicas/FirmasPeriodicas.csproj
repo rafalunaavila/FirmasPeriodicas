@@ -64,6 +64,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -75,7 +76,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Buttons.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="CapaPD\Users.cs" />
+    <Compile Include="Cls_Libreria.cs" />
     <Compile Include="EditarHuella.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,11 +101,41 @@
     <Compile Include="MenuPrincipal.Designer.cs">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Msm_Forms\FormDanger .cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Msm_Forms\FormDanger .Designer.cs">
+      <DependentUpon>FormDanger .cs</DependentUpon>
+    </Compile>
+    <Compile Include="Msm_Forms\FormInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Msm_Forms\FormInformation.Designer.cs">
+      <DependentUpon>FormInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Msm_Forms\FormAsistencia.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Msm_Forms\FormAsistencia.Designer.cs">
+      <DependentUpon>FormAsistencia.cs</DependentUpon>
+    </Compile>
     <Compile Include="Msm_Forms\Filtro.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Msm_Forms\Filtro.Designer.cs">
       <DependentUpon>Filtro.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Msm_Forms\FormSalir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Msm_Forms\FormSalir.Designer.cs">
+      <DependentUpon>FormSalir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Msm_Forms\FormWarning.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Msm_Forms\FormWarning.Designer.cs">
+      <DependentUpon>FormWarning.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -120,8 +155,23 @@
     <EmbeddedResource Include="MenuPrincipal.resx">
       <DependentUpon>MenuPrincipal.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Msm_Forms\FormAsistencia.resx">
+      <DependentUpon>FormAsistencia.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Msm_Forms\Filtro.resx">
       <DependentUpon>Filtro.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Msm_Forms\FormDanger .resx">
+      <DependentUpon>FormDanger .cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Msm_Forms\FormInformation.resx">
+      <DependentUpon>FormInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Msm_Forms\FormSalir.resx">
+      <DependentUpon>FormSalir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Msm_Forms\FormWarning.resx">
+      <DependentUpon>FormWarning.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

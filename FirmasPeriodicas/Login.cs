@@ -24,13 +24,16 @@ namespace FirmasPeriodicas
 
         public Login()
         {
+            
             InitializeComponent();
-     
-   
+            txt_pass.PasswordChar = '*';
+
+
 
         }
         private void Login_Load(object sender, EventArgs e)
         {
+            Filtro fil = new Filtro();
 
         }
      
@@ -44,17 +47,8 @@ namespace FirmasPeriodicas
             }
         }
 
-        private void btn_close_Click(object sender, EventArgs e)
-        {
-            this.Tag = "";
-            Application.Exit();
-        }
 
-        private void txt_user_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
+  
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -64,14 +58,22 @@ namespace FirmasPeriodicas
         {
             if (txt_user.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Ingresa tu usuario", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+              
+                Cls_Libreria.Mensajesistema = "Ingresa tu Usuario";
+                FormWarning fw = new FormWarning();
+                fw.Show();
+                fw.CaragarDatos();
                 txt_user.Focus();
                 return false;
             }
             if (txt_pass.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Ingresa tu Contrseña", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                txt_pass.Focus();
+             
+                Cls_Libreria.Mensajesistema = "Ingresa tu Contraseña";
+                FormWarning fw = new FormWarning();  
+                fw.Show();
+                fw.CaragarDatos();
+                txt_user.Focus();
                 return false;
             }
             return true;
@@ -89,36 +91,37 @@ namespace FirmasPeriodicas
             pass = txt_pass.Text.Trim();
             if (obj.Verificar_Acceso(usu, pass) == true)
             {
+                Cls_Libreria.NombreUsuario = usu;
                 this.Hide(); 
-                Filtro fil = new Filtro();
-                fil.Show();
-                MessageBox.Show("Bienvenido al sistema", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
-               
+                Cls_Libreria.Mensajesistema = "Bienvenid@ al sistema " + usu;
+                FormInformation fw = new FormInformation();
+                fw.Show();
+                fw.CaragarDatos();
                 MenuPrincipal xMenuPrincipal = new MenuPrincipal();
                 xMenuPrincipal.Show();
-                fil.Close();
 
             }
             else
             {
-                MessageBox.Show("Usuario o contrseña invalidos", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                Cls_Libreria.Mensajesistema = "Usuario o contraseña invalidos " + usu;
+                FormWarning fw = new FormWarning();
+                fw.Show();
+                fw.CaragarDatos();
                 txt_pass.Text = "";
                 txt_user.Text = "";
                 txt_user.Focus();
                 veces += 1;
                 if (veces == 3)
                 {
-                    MessageBox.Show("El Numero Mximo De intentos fue superado", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                    MessageBox.Show("El numero maximo de intentos fue superado", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     Application.Exit();
                 }
             }
 
         }
 
-        private void btn_Login_Click(object sender, EventArgs e)
-        {
-            AccederalSistema();
-        }
+      
 
         private void btn_cancelar_Click(object sender, EventArgs e)
         {
@@ -138,6 +141,45 @@ namespace FirmasPeriodicas
             if (e.KeyCode == Keys.Enter)
             {
                 btn_Login_Click(sender, e);
+            }
+        }
+
+        private void btn_Salir_Click(object sender, EventArgs e)
+        {
+            this.Tag = "";
+            Application.Exit();
+
+        }
+
+        private void btn_Login_Click(object sender, EventArgs e)
+        {
+            AccederalSistema();
+        }
+
+        private void label13_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Utilitarios u = new Utilitarios();
+                u.Mover_formulario(this);
+            }
+        }
+
+        private void pictureBox3_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Utilitarios u = new Utilitarios();
+                u.Mover_formulario(this);
+            }
+        }
+
+        private void pictureBox5_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                Utilitarios u = new Utilitarios();
+                u.Mover_formulario(this);
             }
         }
     }

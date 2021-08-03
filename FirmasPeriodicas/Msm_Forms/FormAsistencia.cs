@@ -25,7 +25,7 @@ namespace FirmasPeriodicas.Msm_Forms
         {
             try
             {
-
+                label3.Text = Cls_Libreria.Fecha;
                 lbl_nombre.Text = Cls_Libreria.NombrePerson +" "+ Cls_Libreria.PaternoPerson +" "+ Cls_Libreria.MaternoPerson;
                 pictureBox1.Load(@"http://10.6.60.190/Fotos/" + Cls_Libreria.Foto);
                // MessageBox.Show("hola"+pictureBox1.Image.Width + "largoo" + pictureBox1.Image.Height);

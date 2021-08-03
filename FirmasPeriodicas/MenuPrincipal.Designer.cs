@@ -281,7 +281,7 @@ namespace FirmasPeriodicas
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Accidental Presidency", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
             this.label1.Location = new System.Drawing.Point(129, -4);
             this.label1.Name = "label1";
@@ -393,11 +393,11 @@ namespace FirmasPeriodicas
             // 
             // comboBox1
             // 
-            this.comboBox1.Font = new System.Drawing.Font("Arial", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.comboBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(10, 43);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(201, 22);
+            this.comboBox1.Size = new System.Drawing.Size(201, 23);
             this.comboBox1.TabIndex = 12;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
@@ -428,15 +428,15 @@ namespace FirmasPeriodicas
             // dateTimePicker1
             // 
             this.dateTimePicker1.Enabled = false;
-            this.dateTimePicker1.Location = new System.Drawing.Point(275, 151);
+            this.dateTimePicker1.Location = new System.Drawing.Point(270, 151);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePicker1.Size = new System.Drawing.Size(246, 23);
             this.dateTimePicker1.TabIndex = 2;
             // 
             // pictureBox9
             // 
             this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
-            this.pictureBox9.Location = new System.Drawing.Point(382, -81);
+            this.pictureBox9.Location = new System.Drawing.Point(399, -88);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(414, 442);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -549,12 +549,12 @@ namespace FirmasPeriodicas
             // 
             this.label9.AutoSize = true;
             this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
-            this.label9.Font = new System.Drawing.Font("NewsGoth BT", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
             this.label9.Location = new System.Drawing.Point(439, 14);
             this.label9.Name = "label9";
             this.label9.Padding = new System.Windows.Forms.Padding(42, 4, 42, 4);
-            this.label9.Size = new System.Drawing.Size(150, 24);
+            this.label9.Size = new System.Drawing.Size(167, 24);
             this.label9.TabIndex = 4;
             this.label9.Text = "Supervisor";
             // 
@@ -562,12 +562,12 @@ namespace FirmasPeriodicas
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
-            this.label8.Font = new System.Drawing.Font("NewsGoth BT", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
             this.label8.Location = new System.Drawing.Point(327, 14);
             this.label8.Name = "label8";
             this.label8.Padding = new System.Windows.Forms.Padding(4);
-            this.label8.Size = new System.Drawing.Size(110, 24);
+            this.label8.Size = new System.Drawing.Size(134, 24);
             this.label8.TabIndex = 4;
             this.label8.Text = "Apellido Materno";
             // 
@@ -575,12 +575,12 @@ namespace FirmasPeriodicas
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
-            this.label7.Font = new System.Drawing.Font("NewsGoth BT", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
             this.label7.Location = new System.Drawing.Point(219, 14);
             this.label7.Name = "label7";
             this.label7.Padding = new System.Windows.Forms.Padding(4);
-            this.label7.Size = new System.Drawing.Size(107, 24);
+            this.label7.Size = new System.Drawing.Size(132, 24);
             this.label7.TabIndex = 4;
             this.label7.Text = "Apellido Paterno";
             // 
@@ -588,12 +588,12 @@ namespace FirmasPeriodicas
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
-            this.label6.Font = new System.Drawing.Font("NewsGoth BT", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(85, 14);
             this.label6.Name = "label6";
             this.label6.Padding = new System.Windows.Forms.Padding(40, 4, 40, 4);
-            this.label6.Size = new System.Drawing.Size(132, 24);
+            this.label6.Size = new System.Drawing.Size(143, 24);
             this.label6.TabIndex = 4;
             this.label6.Text = "Nombre";
             // 
@@ -601,12 +601,12 @@ namespace FirmasPeriodicas
             // 
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
-            this.label4.Font = new System.Drawing.Font("NewsGoth BT", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
             this.label4.Location = new System.Drawing.Point(6, 14);
             this.label4.Name = "label4";
             this.label4.Padding = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.label4.Size = new System.Drawing.Size(78, 24);
+            this.label4.Size = new System.Drawing.Size(94, 24);
             this.label4.TabIndex = 4;
             this.label4.Text = "Id Registro";
             // 
@@ -856,6 +856,7 @@ namespace FirmasPeriodicas
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tabControl1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MenuPrincipal";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MenuPrincipal";

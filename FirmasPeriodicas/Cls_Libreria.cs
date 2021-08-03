@@ -14,6 +14,7 @@ namespace FirmasPeriodicas
         private static string Materno_Person;
         private static string _Foto;
         private static string Mensaje_sistema;
+        private static string _Fecha;
 
 
         public static string NombreUsuario { get => Nombre_Usuario; set => Nombre_Usuario = value; }
@@ -22,7 +23,8 @@ namespace FirmasPeriodicas
         public static string MaternoPerson { get => Materno_Person; set => Materno_Person = value; }
         public static string Foto { get => _Foto; set => _Foto = value; }
         public static string Mensajesistema { get => Mensaje_sistema; set => Mensaje_sistema = value; }
-        
+        public static string Fecha { get => _Fecha; set => _Fecha = value; }
+
 
     }
 }

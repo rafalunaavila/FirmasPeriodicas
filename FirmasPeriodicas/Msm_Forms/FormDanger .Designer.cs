@@ -127,6 +127,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.rjButton1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormDanger";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormDanger";

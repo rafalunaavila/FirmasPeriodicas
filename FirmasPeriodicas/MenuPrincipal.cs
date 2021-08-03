@@ -125,15 +125,9 @@ namespace FirmasPeriodicas
         //SACAMOS EL ID DE LA PERSONA SELECCIONADA
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-
-            int selectedIndex = comboBox1.SelectedIndex;
-            Object selectedItem = comboBox1.SelectedItem;
             var display = comboBox1.SelectedValue.ToString();
-            lbl_id.Text = display;
-            string selected = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
-            nombre = selected;
+            lbl_id.Text = display;   
             enrollmentControl1.Enabled = true;
-
         }
 
         #region REGISTRO DE ASISTENCIA
@@ -178,6 +172,8 @@ namespace FirmasPeriodicas
                         Cls_Libreria.NombrePerson = nombrePersona;
                         Cls_Libreria.PaternoPerson = PaternoPersona;
                         Cls_Libreria.MaternoPerson = MaternoPersona;
+                        Cls_Libreria.Fecha = dateTimePicker1.Value.ToString();
+                        
                         
                         Cls_Libreria.Foto = Convert.ToString(xitem["rutaFoto"]);
                         encontro = true;

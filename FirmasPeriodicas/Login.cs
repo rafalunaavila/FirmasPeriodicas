@@ -93,7 +93,7 @@ namespace FirmasPeriodicas
             {
                 Cls_Libreria.NombreUsuario = usu;
                 this.Hide(); 
-                Cls_Libreria.Mensajesistema = "Bienvenid@ al sistema " + usu;
+                Cls_Libreria.Mensajesistema = "Bienvenid@ al sistema " +" " +usu;
                 FormInformation fw = new FormInformation();
                 fw.Show();
                 fw.CaragarDatos();

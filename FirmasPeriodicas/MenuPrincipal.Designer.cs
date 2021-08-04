@@ -70,8 +70,6 @@ namespace FirmasPeriodicas
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.btn_add = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txt_buscador = new System.Windows.Forms.TextBox();
@@ -460,8 +458,6 @@ namespace FirmasPeriodicas
             this.tabPage4.Controls.Add(this.pictureBox7);
             this.tabPage4.Controls.Add(this.btn_add);
             this.tabPage4.Controls.Add(this.label9);
-            this.tabPage4.Controls.Add(this.label8);
-            this.tabPage4.Controls.Add(this.label7);
             this.tabPage4.Controls.Add(this.label6);
             this.tabPage4.Controls.Add(this.label4);
             this.tabPage4.Controls.Add(this.txt_buscador);
@@ -551,38 +547,12 @@ namespace FirmasPeriodicas
             this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.White;
-            this.label9.Location = new System.Drawing.Point(439, 14);
+            this.label9.Location = new System.Drawing.Point(397, 14);
             this.label9.Name = "label9";
-            this.label9.Padding = new System.Windows.Forms.Padding(42, 4, 42, 4);
-            this.label9.Size = new System.Drawing.Size(167, 24);
+            this.label9.Padding = new System.Windows.Forms.Padding(55, 4, 55, 4);
+            this.label9.Size = new System.Drawing.Size(193, 24);
             this.label9.TabIndex = 4;
             this.label9.Text = "Supervisor";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(327, 14);
-            this.label8.Name = "label8";
-            this.label8.Padding = new System.Windows.Forms.Padding(4);
-            this.label8.Size = new System.Drawing.Size(134, 24);
-            this.label8.TabIndex = 4;
-            this.label8.Text = "Apellido Materno";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(219, 14);
-            this.label7.Name = "label7";
-            this.label7.Padding = new System.Windows.Forms.Padding(4);
-            this.label7.Size = new System.Drawing.Size(132, 24);
-            this.label7.TabIndex = 4;
-            this.label7.Text = "Apellido Paterno";
             // 
             // label6
             // 
@@ -590,10 +560,10 @@ namespace FirmasPeriodicas
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(86)))), ((int)(((byte)(103)))));
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(85, 14);
+            this.label6.Location = new System.Drawing.Point(102, 14);
             this.label6.Name = "label6";
-            this.label6.Padding = new System.Windows.Forms.Padding(40, 4, 40, 4);
-            this.label6.Size = new System.Drawing.Size(143, 24);
+            this.label6.Padding = new System.Windows.Forms.Padding(115, 4, 115, 4);
+            this.label6.Size = new System.Drawing.Size(293, 24);
             this.label6.TabIndex = 4;
             this.label6.Text = "Nombre";
             // 
@@ -920,8 +890,6 @@ namespace FirmasPeriodicas
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Button btn_update;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TabControl tabControl1;

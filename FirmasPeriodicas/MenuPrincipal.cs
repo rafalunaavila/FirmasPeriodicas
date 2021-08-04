@@ -272,9 +272,9 @@ namespace FirmasPeriodicas
             lis.FullRowSelect = true;
             lis.Scrollable = true;
             lis.HideSelection = false;
-            lis.Columns.Add("ID", 70, HorizontalAlignment.Left);
-            lis.Columns.Add("NombreCompleto", 300, HorizontalAlignment.Left);
-            lis.Columns.Add("Supervisor", 150, HorizontalAlignment.Left);
+            lis.Columns.Add("ID", 100, HorizontalAlignment.Left);
+            lis.Columns.Add("NombreCompleto", 290, HorizontalAlignment.Left);
+            lis.Columns.Add("Supervisor", 190, HorizontalAlignment.Left);
             lsv_PerosnasHuella.Items.Clear();
             for (int i = 0; i < data.Rows.Count; i++)
             {
@@ -392,11 +392,13 @@ namespace FirmasPeriodicas
         }
         private void tabControl1_Selecting(object sender, TabControlCancelEventArgs e)
         {
-          if(e.TabPageIndex != 3)
+          if(e.TabPageIndex == 3)
+            {
+                Cargar_Todo_Asistencia();
+            }
+            if(e.TabPageIndex != 3)
             {
                 mostrarComboVox();
-                Cargar_Todo_Asistencia();
-                
             }
             if (e.TabPageIndex == 1)
             {      
@@ -413,6 +415,7 @@ namespace FirmasPeriodicas
             {
                 verificationControl2.Active = false;
                 pictureBox12.Hide();
+                
             }
             if (e.TabPageIndex != 4)
             {

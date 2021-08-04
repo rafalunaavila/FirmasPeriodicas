@@ -273,18 +273,14 @@ namespace FirmasPeriodicas
             lis.Scrollable = true;
             lis.HideSelection = false;
             lis.Columns.Add("ID", 70, HorizontalAlignment.Left);
-            lis.Columns.Add("Nombre", 140, HorizontalAlignment.Left);
-            lis.Columns.Add("Apellido Paterno", 110, HorizontalAlignment.Left);
-            lis.Columns.Add("Apellido Materno", 110, HorizontalAlignment.Left);
+            lis.Columns.Add("NombreCompleto", 300, HorizontalAlignment.Left);
             lis.Columns.Add("Supervisor", 150, HorizontalAlignment.Left);
             lsv_PerosnasHuella.Items.Clear();
             for (int i = 0; i < data.Rows.Count; i++)
             {
                 DataRow dr = data.Rows[i];
                 ListViewItem list = new ListViewItem(dr["idregistroHuella"].ToString());
-                list.SubItems.Add(dr["Nombre"].ToString());
-                list.SubItems.Add(dr["Paterno"].ToString());
-                list.SubItems.Add(dr["Materno"].ToString());
+                list.SubItems.Add(dr["NombreCompleto"].ToString());
                 list.SubItems.Add(dr["Supervisor"].ToString());
                 lsv_PerosnasHuella.Items.Add(list);
             }
@@ -293,7 +289,7 @@ namespace FirmasPeriodicas
         #endregion
         private void txt_buscador_TextChanged(object sender, EventArgs e)
         {
-            if (txt_buscador.Text.Trim().Length > 2)
+            if (txt_buscador.Text.Trim().Length > 0)
             {
                 Buscar_Personal_PorValor(txt_buscador.Text.Trim());
             }
@@ -322,7 +318,7 @@ namespace FirmasPeriodicas
 
         private void txt_buscador_KeyDown(object sender, KeyEventArgs e)
         {
-            if (txt_buscador.Text.Trim().Length > 2)
+            if (txt_buscador.Text.Trim().Length > 0)
             {
                 Buscar_Personal_PorValor(txt_buscador.Text.Trim());
             }

@@ -22,6 +22,8 @@ namespace FirmasPeriodicas.Msm_Forms
             try
             {
                 lbl_Danger.Text = Cls_Libreria.Mensajesistema;
+                lbl_Danger2.Text = Cls_Libreria.Mensajesistema2;
+                lbl_Danger3.Text = Cls_Libreria.Mensajesistema3;
             }
             catch (Exception ex)
             {

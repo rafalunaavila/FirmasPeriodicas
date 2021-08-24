@@ -36,6 +36,8 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.rjButton1 = new CustomControls.RJControls.RJButton();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbl_Danger2 = new System.Windows.Forms.Label();
+            this.lbl_Danger3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,7 +57,7 @@
             this.rjButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton2.Font = new System.Drawing.Font("Coolvetica Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rjButton2.ForeColor = System.Drawing.Color.Black;
-            this.rjButton2.Location = new System.Drawing.Point(117, 123);
+            this.rjButton2.Location = new System.Drawing.Point(117, 131);
             this.rjButton2.Name = "rjButton2";
             this.rjButton2.Size = new System.Drawing.Size(150, 40);
             this.rjButton2.TabIndex = 11;
@@ -69,11 +71,10 @@
             this.lbl_Danger.AutoSize = true;
             this.lbl_Danger.BackColor = System.Drawing.Color.White;
             this.lbl_Danger.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Danger.Location = new System.Drawing.Point(88, 64);
+            this.lbl_Danger.Location = new System.Drawing.Point(79, 47);
             this.lbl_Danger.Name = "lbl_Danger";
-            this.lbl_Danger.Size = new System.Drawing.Size(65, 25);
+            this.lbl_Danger.Size = new System.Drawing.Size(0, 25);
             this.lbl_Danger.TabIndex = 10;
-            this.lbl_Danger.Text = "Mensaje";
             // 
             // pictureBox1
             // 
@@ -115,12 +116,36 @@
             this.label2.TabIndex = 12;
             this.label2.Text = "Informe del Sistema ";
             // 
+            // lbl_Danger2
+            // 
+            this.lbl_Danger2.AutoSize = true;
+            this.lbl_Danger2.BackColor = System.Drawing.Color.White;
+            this.lbl_Danger2.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.lbl_Danger2.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Danger2.Location = new System.Drawing.Point(79, 72);
+            this.lbl_Danger2.Name = "lbl_Danger2";
+            this.lbl_Danger2.Size = new System.Drawing.Size(0, 25);
+            this.lbl_Danger2.TabIndex = 13;
+            // 
+            // lbl_Danger3
+            // 
+            this.lbl_Danger3.AutoSize = true;
+            this.lbl_Danger3.BackColor = System.Drawing.Color.White;
+            this.lbl_Danger3.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.lbl_Danger3.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Danger3.Location = new System.Drawing.Point(79, 97);
+            this.lbl_Danger3.Name = "lbl_Danger3";
+            this.lbl_Danger3.Size = new System.Drawing.Size(0, 25);
+            this.lbl_Danger3.TabIndex = 14;
+            // 
             // FormDanger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(367, 189);
+            this.Controls.Add(this.lbl_Danger3);
+            this.Controls.Add(this.lbl_Danger2);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rjButton2);
             this.Controls.Add(this.lbl_Danger);
@@ -145,5 +170,7 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private CustomControls.RJControls.RJButton rjButton1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_Danger2;
+        private System.Windows.Forms.Label lbl_Danger3;
     }
 }

@@ -38,7 +38,9 @@ namespace FirmasPeriodicas
 
             Verificar = new DPFP.Verification.Verification();
             Resultado = new DPFP.Verification.Verification.Result();
-      
+
+            dateTimePicker1.Value = DateTime.Now;
+
         }
 
     
@@ -148,6 +150,9 @@ namespace FirmasPeriodicas
             string nombrePersona = "";
             string PaternoPersona = "";
             string MaternoPersona = "";
+            sbyte Candado;
+            string Supervisor = "";
+     
 
             try
             {
@@ -165,6 +170,13 @@ namespace FirmasPeriodicas
                     nombrePersona = Convert.ToString(xitem["Nombre"]);
                     PaternoPersona = Convert.ToString(xitem["Paterno"]);
                     MaternoPersona = Convert.ToString(xitem["Materno"]);
+                    Supervisor = Convert.ToString(xitem["Supervisor"]);
+
+                    Cls_Libreria.Mensajesistema = "No puedes registrar su firma";
+                    Cls_Libreria.Mensajesistema2 = "Solicite a su supervisor";
+                    Cls_Libreria.Mensajesistema3 = Supervisor;
+
+
                     templateDB.DeSerialize(fingeprintByte);
                     Verificar.Verify(FeatureSet, templateDB, ref Resultado);
                     if (Resultado.Verified == true)
@@ -181,15 +193,25 @@ namespace FirmasPeriodicas
                         if (objeto.checarRegistroAsistecia(idregistro.Trim()) == true)
                         {
                             objeto = null;
-                            MessageBox.Show("El usuario "+ nombrePersona + " " + PaternoPersona +" "+MaternoPersona +  " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            MessageBox.Show("El usuario " + nombrePersona + " " + PaternoPersona + " " + MaternoPersona + " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
                         }
                         else
                         {
-                            insertUser.InsertarRegistroPP(Convert.ToDateTime(dateTimePicker1.Value), idregistro);
-                            FormAsistencia fAsis = new FormAsistencia();
-                            fAsis.Show();
-                            fAsis.CaragarDatos();
+                            Candado = Convert.ToSByte(xitem["Candado"]);
+                            if (Candado == 1){
+                                FormDanger fdanger = new FormDanger();
+                                fdanger.Show();
+                                fdanger.CaragarDatos();
+                            }
+                            else
+                            {
+                                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona);
+                                FormAsistencia fAsis = new FormAsistencia();
+                                fAsis.Show();
+                                fAsis.CaragarDatos();
+                            }
+                            
                         }
                     }
 
@@ -409,7 +431,7 @@ namespace FirmasPeriodicas
             {
                 verificationControl2.Active = true;
                 verificationControl1.Active = true;
-                
+                dateTimePicker1.Value = DateTime.Now;                
             }
             if (e.TabPageIndex == 4)
             {

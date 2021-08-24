@@ -31,7 +31,7 @@ namespace FirmasPeriodicas.Msm_Forms
                // MessageBox.Show("hola"+pictureBox1.Image.Width + "largoo" + pictureBox1.Image.Height);
                 int ancho = pictureBox1.Image.Width;
                 int largo = pictureBox1.Image.Height;
-                if (ancho >= largo)
+                if (ancho > largo)
                 {
                     pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
                 }

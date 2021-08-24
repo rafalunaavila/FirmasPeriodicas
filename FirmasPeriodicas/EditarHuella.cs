@@ -22,6 +22,7 @@ namespace FirmasPeriodicas
     {
         public EditarHuella()
         {
+           
             InitializeComponent();
         }
 
@@ -43,6 +44,7 @@ namespace FirmasPeriodicas
         {
             try
             {
+                enrollmentControl1.Enabled = false;
                 Users obj = new Users();
                 DataTable data = new DataTable();
                 data = obj.RN_Buscar_personal_xvalor_edicion(xvalor);

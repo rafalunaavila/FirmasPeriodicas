@@ -36,9 +36,9 @@ namespace FirmasPeriodicas.CapaPD
             objetoCD.Insertar(fingerprint, idperosna);
         }
 
-        public void InsertarRegistroPP(DateTime fechaFirma, string registroidHuella)
+        public void InsertarRegistroPP(DateTime fechaFirma, string registroidHuella, string personaIdPersona)
         {
-            objetoCD.insertarPresentacion(fechaFirma, registroidHuella);
+            objetoCD.insertarPresentacion(fechaFirma, registroidHuella, personaIdPersona);
         }
         public bool checarRegistroAsistecia(string id)
         {

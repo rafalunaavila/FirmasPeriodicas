@@ -22,6 +22,7 @@ namespace FirmasPeriodicas.Msm_Forms
         {
             try
             {
+                lbl_nombrep.Text = Cls_Libreria.NombrePerson;
                 lbl_Warning.Text = Cls_Libreria.Mensajesistema;
                 
             }

@@ -30,7 +30,12 @@ namespace FirmasPeriodicas.CapaPD
         {
             DBUsuario obj = new DBUsuario();
             return obj.mostrarPH();
-        }
+        }   
+        //public DataTable mostrarSupervisorUH()
+        //{
+        //    DBUsuario obj = new DBUsuario();
+        //    return obj.mostrarUH();
+        //}
         public void InsertarPRod(object fingerprint, string idperosna)
         {
             objetoCD.Insertar(fingerprint, idperosna);
@@ -60,20 +65,24 @@ namespace FirmasPeriodicas.CapaPD
         public DataTable RN_Buscar_personal_xvalor(String valor)
         {
             DBUsuario obj = new DBUsuario();
-           return obj.DB_Buscar_personal_xvalor(valor);
+            return obj.DB_Buscar_personal_xvalor(valor);
 
         }
         public DataTable RN_Buscar_personal_xvalor_edicion(String valor)
         {
             DBUsuario obj = new DBUsuario();
             return obj.DB_Buscar_personal_xvalor_edicion(valor);
-
         }
 
         public void RN_Registrar_Huella_Personal_Edicion(string idper, object finguer)
         {
             DBUsuario obj = new DBUsuario();
             obj.BD_Registrar_Huella_Personal_Edicion(idper, finguer);
+        }
+        public void RN_Registrar_Huella_Supervisor(string user, string pass, object finguer)
+        {
+            DBUsuario obj = new DBUsuario();
+            obj.BD_Registrar_Huella_Supervisor(user, pass,  finguer);
         }
 
     }

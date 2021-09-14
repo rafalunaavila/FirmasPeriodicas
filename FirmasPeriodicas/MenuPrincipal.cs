@@ -33,6 +33,9 @@ namespace FirmasPeriodicas
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
+            verificationControl2.Active = false;
+            verificationControl1.Active = false;
+
             comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
 
@@ -40,6 +43,7 @@ namespace FirmasPeriodicas
             Resultado = new DPFP.Verification.Verification.Result();
 
             dateTimePicker1.Value = DateTime.Now;
+
 
         }
 
@@ -49,6 +53,7 @@ namespace FirmasPeriodicas
         private void enrollmentControl1_OnStartEnroll(object Control, string ReaderSerialNumber, int Finger)
         {
             ListEvents.Items.Insert(0, String.Format("OnStartEnroll: {0}, finger {1}", ReaderSerialNumber, Finger));
+           
         }
 
         private void enrollmentControl1_OnSampleQuality(object Control, string ReaderSerialNumber, int Finger, DPFP.Capture.CaptureFeedback CaptureFeedback)
@@ -83,13 +88,14 @@ namespace FirmasPeriodicas
         string nombre="";
         private void enrollmentControl1_OnEnroll(object Control, int FingerMask, DPFP.Template Template, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
         {
-            
+           
             byte[] bytes = null;
             if (Template is null)
             {
                 Template.Serialize(ref bytes);
                 Cls_Libreria.Mensajesistema = "La huella no se pudo registrar ";
-                FormDanger fw = new FormDanger();
+
+                FormWarning fw = new FormWarning();
                 fw.Show();
                 fw.CaragarDatos();
                 this.Tag = "";
@@ -110,6 +116,8 @@ namespace FirmasPeriodicas
                 {
                     Template.Serialize(ref bytes);
                     insertUser.InsertarPRod(bytes, lbl_id.Text);
+                    string usuario = Cls_Libreria.NombreUsuario;
+                    //insertUser.InsertarPRod(bytes, lbl_id.Text, usuario);
                     Cls_Libreria.Mensajesistema = "La persona "+ nombre + " se ha registrado con exito ";
                     FormInformation fw = new FormInformation();
                     fw.Show();
@@ -127,9 +135,22 @@ namespace FirmasPeriodicas
         //SACAMOS EL ID DE LA PERSONA SELECCIONADA
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int selectedIndex = comboBox1.SelectedIndex;
+            Object selectedItem = comboBox1.SelectedItem;
             var display = comboBox1.SelectedValue.ToString();
-            lbl_id.Text = display;   
+            lbl_id.Text = display;
+
+            string selected = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
+            nombre = selected;
+            Cls_Libreria.NombrePerson = nombre;
+
+            lbl_nombrep.Text = Cls_Libreria.NombrePerson;
             enrollmentControl1.Enabled = true;
+
+            FormWarning fw = new FormWarning();
+            Cls_Libreria.Mensajesistema = "Se registrara a la persona: ";
+            fw.Show();
+            fw.CaragarDatos();
         }
 
         #region REGISTRO DE ASISTENCIA
@@ -185,7 +206,6 @@ namespace FirmasPeriodicas
                         Cls_Libreria.PaternoPerson = PaternoPersona;
                         Cls_Libreria.MaternoPerson = MaternoPersona;
                         Cls_Libreria.Fecha = dateTimePicker1.Value.ToString();
-                        
                         
                         Cls_Libreria.Foto = Convert.ToString(xitem["rutaFoto"]);
                         encontro = true;
@@ -418,32 +438,29 @@ namespace FirmasPeriodicas
             {
                 Cargar_Todo_Asistencia();
             }
-            if(e.TabPageIndex != 3)
+          if (e.TabPageIndex == 1)
             {
                 mostrarComboVox();
-            }
-            if (e.TabPageIndex == 1)
-            {      
                 verificationControl2.Active = false;
                 verificationControl1.Active = false;
             }
-            if ((e.TabPageIndex == 2)||(e.TabPageIndex == 4))
+          if ((e.TabPageIndex == 2)||(e.TabPageIndex == 4))
             {
                 verificationControl2.Active = true;
                 verificationControl1.Active = true;
                 dateTimePicker1.Value = DateTime.Now;                
-            }
-            if (e.TabPageIndex == 4)
+          }
+          if (e.TabPageIndex == 4)
             {
                 verificationControl2.Active = false;
                 pictureBox12.Hide();
                 
-            }
-            if (e.TabPageIndex != 4)
+          }
+          if (e.TabPageIndex != 4)
             {
                 lbl_nombre.Text = "";
                 lbl_Supervisor.Text = "";
-            }
+          }
         }
 
         private void label5_MouseMove(object sender, MouseEventArgs e)

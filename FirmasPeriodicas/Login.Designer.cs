@@ -46,6 +46,7 @@ namespace FirmasPeriodicas
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.btn_Login = new CustomControls.RJControls.RJButton();
+            this.label2 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -207,7 +208,7 @@ namespace FirmasPeriodicas
             this.btn_Login.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_Login.Font = new System.Drawing.Font("Coolvetica Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_Login.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(52)))), ((int)(((byte)(96)))));
-            this.btn_Login.Location = new System.Drawing.Point(86, 241);
+            this.btn_Login.Location = new System.Drawing.Point(86, 316);
             this.btn_Login.Name = "btn_Login";
             this.btn_Login.Size = new System.Drawing.Size(221, 36);
             this.btn_Login.TabIndex = 12;
@@ -216,12 +217,23 @@ namespace FirmasPeriodicas
             this.btn_Login.UseVisualStyleBackColor = false;
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Coolvetica Rg", 12F);
+            this.label2.Location = new System.Drawing.Point(181, 223);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(20, 19);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "O";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_Login);
             this.Controls.Add(this.pictureBox6);
             this.Controls.Add(this.pictureBox2);
@@ -265,6 +277,7 @@ namespace FirmasPeriodicas
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox6;
         private CustomControls.RJControls.RJButton btn_Login;
+        private Label label2;
     }
 }
 

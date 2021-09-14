@@ -36,6 +36,7 @@
             this.lbl_Warning = new System.Windows.Forms.Label();
             this.rjButton2 = new CustomControls.RJControls.RJButton();
             this.label2 = new System.Windows.Forms.Label();
+            this.lbl_nombrep = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -55,9 +56,9 @@
             this.rjButton1.FlatAppearance.BorderSize = 0;
             this.rjButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton1.ForeColor = System.Drawing.Color.White;
-            this.rjButton1.Location = new System.Drawing.Point(5, 5);
+            this.rjButton1.Location = new System.Drawing.Point(3, 4);
             this.rjButton1.Name = "rjButton1";
-            this.rjButton1.Size = new System.Drawing.Size(355, 177);
+            this.rjButton1.Size = new System.Drawing.Size(357, 179);
             this.rjButton1.TabIndex = 1;
             this.rjButton1.TextColor = System.Drawing.Color.White;
             this.rjButton1.UseVisualStyleBackColor = false;
@@ -78,7 +79,7 @@
             this.lbl_Warning.AutoSize = true;
             this.lbl_Warning.BackColor = System.Drawing.Color.White;
             this.lbl_Warning.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Warning.Location = new System.Drawing.Point(101, 64);
+            this.lbl_Warning.Location = new System.Drawing.Point(92, 47);
             this.lbl_Warning.Name = "lbl_Warning";
             this.lbl_Warning.Size = new System.Drawing.Size(65, 25);
             this.lbl_Warning.TabIndex = 3;
@@ -95,9 +96,9 @@
             this.rjButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton2.Font = new System.Drawing.Font("Coolvetica Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rjButton2.ForeColor = System.Drawing.Color.Black;
-            this.rjButton2.Location = new System.Drawing.Point(117, 125);
+            this.rjButton2.Location = new System.Drawing.Point(141, 126);
             this.rjButton2.Name = "rjButton2";
-            this.rjButton2.Size = new System.Drawing.Size(150, 40);
+            this.rjButton2.Size = new System.Drawing.Size(100, 40);
             this.rjButton2.TabIndex = 7;
             this.rjButton2.Text = "A c e p t a r";
             this.rjButton2.TextColor = System.Drawing.Color.Black;
@@ -116,12 +117,23 @@
             this.label2.TabIndex = 8;
             this.label2.Text = "Informe del Sistema ";
             // 
+            // lbl_nombrep
+            // 
+            this.lbl_nombrep.AutoSize = true;
+            this.lbl_nombrep.BackColor = System.Drawing.Color.White;
+            this.lbl_nombrep.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_nombrep.Location = new System.Drawing.Point(92, 78);
+            this.lbl_nombrep.Name = "lbl_nombrep";
+            this.lbl_nombrep.Size = new System.Drawing.Size(0, 25);
+            this.lbl_nombrep.TabIndex = 9;
+            // 
             // FormWarning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(367, 189);
+            this.Controls.Add(this.lbl_nombrep);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.rjButton2);
             this.Controls.Add(this.lbl_Warning);
@@ -147,5 +159,6 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private CustomControls.RJControls.RJButton rjButton2;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lbl_nombrep;
     }
 }

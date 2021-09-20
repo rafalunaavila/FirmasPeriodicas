@@ -33,17 +33,11 @@ namespace FirmasPeriodicas
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-            verificationControl2.Active = false;
-            verificationControl1.Active = false;
-
             comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
-
             Verificar = new DPFP.Verification.Verification();
             Resultado = new DPFP.Verification.Verification.Result();
-
             dateTimePicker1.Value = DateTime.Now;
-
 
         }
 
@@ -86,50 +80,58 @@ namespace FirmasPeriodicas
         }
         //AQUI REGISTRAMOS PERSONAS AL REGISTRO DE HUELLA
         string nombre="";
+        string nomsuper = "";
         private void enrollmentControl1_OnEnroll(object Control, int FingerMask, DPFP.Template Template, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
         {
            
-            byte[] bytes = null;
-            if (Template is null)
+            DialogResult dialogResult = MessageBox.Show("¿Desea Regstrar a " + nombre + "?" , "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == DialogResult.No)
             {
-                Template.Serialize(ref bytes);
-                Cls_Libreria.Mensajesistema = "La huella no se pudo registrar ";
-
-                FormWarning fw = new FormWarning();
-                fw.Show();
-                fw.CaragarDatos();
-                this.Tag = "";
-                this.Close();
+                return;
             }
             else
             {
-                Users objeto = new Users();
-                if (objeto.checarRegistroPersona(lbl_id.Text.Trim()) == true)
+                nomsuper = Cls_Libreria.NombreUsuario;
+                byte[] bytes = null;
+                if (Template is null)
                 {
-                    DialogResult dialogResult = MessageBox.Show("El Usuario ya esta registrado¿Desea registrar su asistencia?", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        tabControl1.SelectTab(2);
-                    }
+                    Template.Serialize(ref bytes);
+                    Cls_Libreria.Mensajesistema = "La huella no se pudo registrar ";
+                    FormWarning fw = new FormWarning();
+                    fw.Show();
+                    fw.CaragarDatos();
+                    this.Tag = "";
+                    this.Close();
                 }
                 else
                 {
-                    Template.Serialize(ref bytes);
-                    insertUser.InsertarPRod(bytes, lbl_id.Text);
-                    string usuario = Cls_Libreria.NombreUsuario;
-                    //insertUser.InsertarPRod(bytes, lbl_id.Text, usuario);
-                    Cls_Libreria.Mensajesistema = "La persona "+ nombre + " se ha registrado con exito ";
-                    FormInformation fw = new FormInformation();
-                    fw.Show();
-                    fw.CaragarDatos();
-                    tabControl1.SelectTab(2);
-                    enrollmentControl1.Enabled = false;
+                    Users objeto = new Users();
+                    if (objeto.checarRegistroPersona(lbl_id.Text.Trim()) == true)
+                    {
+                        DialogResult dialogResult2 = MessageBox.Show("El Usuario ya esta registrado¿Desea registrar su asistencia?", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult2 == DialogResult.Yes)
+                        {
+                            tabControl1.SelectTab(2);
+                        }
+                    }
+                    else
+                    {
+                        Template.Serialize(ref bytes);
+                        insertUser.InsertarPRod(bytes, lbl_id.Text, nomsuper, DateTime.Now);
+                        string usuario = Cls_Libreria.NombreUsuario;
+                        //insertUser.InsertarPRod(bytes, lbl_id.Text, usuario);
+                        Cls_Libreria.Mensajesistema = "La persona " + nombre + " se ha registrado con exito ";
+                        FormInformation fw = new FormInformation();
+                        fw.Show();
+                        fw.CaragarDatos();
+                        tabControl1.SelectTab(2);
+                        enrollmentControl1.Enabled = false;
+                    }
+
 
                 }
-
-
-            }
-            return;
+                return;
+            }  
         }
         #endregion
         //SACAMOS EL ID DE LA PERSONA SELECCIONADA
@@ -139,18 +141,15 @@ namespace FirmasPeriodicas
             Object selectedItem = comboBox1.SelectedItem;
             var display = comboBox1.SelectedValue.ToString();
             lbl_id.Text = display;
-
             string selected = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
             nombre = selected;
             Cls_Libreria.NombrePerson = nombre;
 
-            lbl_nombrep.Text = Cls_Libreria.NombrePerson;
+            lbl_nombrep.Text = nombre;
             enrollmentControl1.Enabled = true;
 
-            FormWarning fw = new FormWarning();
             Cls_Libreria.Mensajesistema = "Se registrara a la persona: ";
-            fw.Show();
-            fw.CaragarDatos();
+           
         }
 
         #region REGISTRO DE ASISTENCIA
@@ -460,7 +459,8 @@ namespace FirmasPeriodicas
             {
                 lbl_nombre.Text = "";
                 lbl_Supervisor.Text = "";
-          }
+          }   
+          
         }
 
         private void label5_MouseMove(object sender, MouseEventArgs e)

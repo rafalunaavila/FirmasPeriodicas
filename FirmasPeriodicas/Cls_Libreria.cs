@@ -17,6 +17,7 @@ namespace FirmasPeriodicas
         private static string Mensaje_sistema2;
         private static string Mensaje_sistema3;
         private static string _Fecha;
+        private static bool _ok;
 
 
         public static string NombreUsuario { get => Nombre_Usuario; set => Nombre_Usuario = value; }
@@ -28,6 +29,8 @@ namespace FirmasPeriodicas
         public static string Mensajesistema2 { get => Mensaje_sistema2; set => Mensaje_sistema2 = value; }
         public static string Mensajesistema3 { get => Mensaje_sistema3; set => Mensaje_sistema3 = value; }
         public static string Fecha { get => _Fecha; set => _Fecha = value; }
+        public static bool ok { get => _ok; set => _ok = value; }
+  
 
 
     }

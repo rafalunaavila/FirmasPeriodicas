@@ -36,6 +36,7 @@ namespace FirmasPeriodicas
             this.txt_pass = new System.Windows.Forms.TextBox();
             this.bunifuElipse1 = new ns1.BunifuElipse(this.components);
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.label13 = new System.Windows.Forms.Label();
             this.btn_Salir = new System.Windows.Forms.Button();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
@@ -45,8 +46,9 @@ namespace FirmasPeriodicas
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
-            this.btn_Login = new CustomControls.RJControls.RJButton();
             this.label2 = new System.Windows.Forms.Label();
+            this.verificationControl1 = new DPFP.Gui.Verification.VerificationControl();
+            this.btn_Login = new CustomControls.RJControls.RJButton();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -86,6 +88,7 @@ namespace FirmasPeriodicas
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(167)))));
+            this.panel1.Controls.Add(this.button2);
             this.panel1.Controls.Add(this.label13);
             this.panel1.Controls.Add(this.btn_Salir);
             this.panel1.Controls.Add(this.pictureBox5);
@@ -96,6 +99,21 @@ namespace FirmasPeriodicas
             this.panel1.Size = new System.Drawing.Size(800, 65);
             this.panel1.TabIndex = 3;
             this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            // 
+            // button2
+            // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.button2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button2.BackgroundImage")));
+            this.button2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Location = new System.Drawing.Point(729, 3);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(22, 29);
+            this.button2.TabIndex = 12;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label13
             // 
@@ -197,6 +215,27 @@ namespace FirmasPeriodicas
             this.pictureBox6.TabIndex = 11;
             this.pictureBox6.TabStop = false;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Coolvetica Rg", 12F);
+            this.label2.Location = new System.Drawing.Point(181, 223);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(20, 19);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "O";
+            // 
+            // verificationControl1
+            // 
+            this.verificationControl1.Active = true;
+            this.verificationControl1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.verificationControl1.Location = new System.Drawing.Point(167, 247);
+            this.verificationControl1.Name = "verificationControl1";
+            this.verificationControl1.ReaderSerialNumber = "00000000-0000-0000-0000-000000000000";
+            this.verificationControl1.Size = new System.Drawing.Size(49, 49);
+            this.verificationControl1.TabIndex = 15;
+            this.verificationControl1.OnComplete += new DPFP.Gui.Verification.VerificationControl._OnComplete(this.verificationControl1_OnComplete);
+            // 
             // btn_Login
             // 
             this.btn_Login.BackColor = System.Drawing.Color.White;
@@ -217,22 +256,13 @@ namespace FirmasPeriodicas
             this.btn_Login.UseVisualStyleBackColor = false;
             this.btn_Login.Click += new System.EventHandler(this.btn_Login_Click);
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Coolvetica Rg", 12F);
-            this.label2.Location = new System.Drawing.Point(181, 223);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(20, 19);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "O";
-            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.verificationControl1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btn_Login);
             this.Controls.Add(this.pictureBox6);
@@ -260,8 +290,8 @@ namespace FirmasPeriodicas
             this.PerformLayout();
 
         }
-
         #endregion
+
 
         private System.Windows.Forms.TextBox txt_user;
         private System.Windows.Forms.TextBox txt_pass;
@@ -278,6 +308,8 @@ namespace FirmasPeriodicas
         private System.Windows.Forms.PictureBox pictureBox6;
         private CustomControls.RJControls.RJButton btn_Login;
         private Label label2;
+        private DPFP.Gui.Verification.VerificationControl verificationControl1;
+        private Button button2;
     }
 }
 

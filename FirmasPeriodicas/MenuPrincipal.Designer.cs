@@ -95,6 +95,7 @@ namespace FirmasPeriodicas
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
             button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -116,6 +117,7 @@ namespace FirmasPeriodicas
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             this.SuspendLayout();
             // 
             // button3
@@ -653,6 +655,7 @@ namespace FirmasPeriodicas
             // 
             // tabPage5
             // 
+            this.tabPage5.Controls.Add(this.pictureBox13);
             this.tabPage5.Controls.Add(this.lbl_Supervisor);
             this.tabPage5.Controls.Add(this.lbl_nombre);
             this.tabPage5.Controls.Add(this.label17);
@@ -835,6 +838,16 @@ namespace FirmasPeriodicas
             // 
             this.printDialog1.UseEXDialog = true;
             // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
+            this.pictureBox13.Location = new System.Drawing.Point(4, 292);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(156, 47);
+            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox13.TabIndex = 32;
+            this.pictureBox13.TabStop = false;
+            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -874,6 +887,7 @@ namespace FirmasPeriodicas
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -941,5 +955,6 @@ namespace FirmasPeriodicas
         private Label lbl_id;
         private Label label2;
         private PrintDialog printDialog1;
+        private PictureBox pictureBox13;
     }
 }

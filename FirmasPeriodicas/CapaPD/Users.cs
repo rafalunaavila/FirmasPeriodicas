@@ -30,15 +30,15 @@ namespace FirmasPeriodicas.CapaPD
         {
             DBUsuario obj = new DBUsuario();
             return obj.mostrarPH();
-        }   
-        //public DataTable mostrarSupervisorUH()
-        //{
-        //    DBUsuario obj = new DBUsuario();
-        //    return obj.mostrarUH();
-        //}
-        public void InsertarPRod(object fingerprint, string idperosna)
+        }
+        public DataTable mostrarSupervisorUH()
         {
-            objetoCD.Insertar(fingerprint, idperosna);
+            DBUsuario obj = new DBUsuario();
+            return obj.mostrarSupervisorH();
+        }
+        public void InsertarPRod(object fingerprint, string idperosna, string supervisor, DateTime fecha)
+        {
+            objetoCD.Insertar(fingerprint, idperosna, supervisor, fecha);
         }
 
         public void InsertarRegistroPP(DateTime fechaFirma, string registroidHuella, string personaIdPersona)

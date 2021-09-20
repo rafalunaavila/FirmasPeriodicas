@@ -25,16 +25,14 @@ namespace FirmasPeriodicas
 
         public Login()
         {
-            
             InitializeComponent();
             txt_pass.PasswordChar = '*';
-
-
-
         }
         private void Login_Load(object sender, EventArgs e)
         {
             Filtro fil = new Filtro();
+            Verificar = new DPFP.Verification.Verification();
+            Resultado = new DPFP.Verification.Verification.Result();
 
         }
      
@@ -92,6 +90,8 @@ namespace FirmasPeriodicas
             pass = txt_pass.Text.Trim();
             if (obj.Verificar_Acceso(usu, pass) == true)
             {
+                verificationControl1.Enabled = false;
+                verificationControl1.Active = false;
                 Cls_Libreria.NombreUsuario = usu;
                 this.Hide(); 
                 Cls_Libreria.Mensajesistema = "Bienvenid@ al sistema " +" " +usu;
@@ -182,6 +182,73 @@ namespace FirmasPeriodicas
                 Utilitarios u = new Utilitarios();
                 u.Mover_formulario(this);
             }
+        }
+
+        private DPFP.Verification.Verification Verificar;
+        private DPFP.Verification.Verification.Result Resultado;
+        private void verificationControl1_OnComplete(object Control, FeatureSet FeatureSet, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
+        {
+            DPFP.Template templateDB = new DPFP.Template();
+            byte[] fingeprintByte;
+            Users obj = new Users();
+            DataTable datosSupervisor = new DataTable();
+            string user = "";
+
+            try
+            {
+                bool encontro = false;
+                datosSupervisor = obj.mostrarSupervisorUH();
+                if (datosSupervisor.Rows.Count <= 0) return;
+                var datoPer = datosSupervisor.Rows[0];
+                foreach (DataRow xitem in datosSupervisor.Rows)
+                {
+                    fingeprintByte = (byte[])xitem["Fingerprint"];
+                    user = Convert.ToString(xitem["usernameFinger"]);
+                    Cls_Libreria.NombreUsuario = user;
+                    Cls_Libreria.Mensajesistema = "No puedes Acceder";
+                    Cls_Libreria.Mensajesistema2 = "Avise a Sistemas";
+                    Cls_Libreria.Mensajesistema3 = user;
+                    templateDB.DeSerialize(fingeprintByte);
+                    Verificar.Verify(FeatureSet, templateDB, ref Resultado);
+                    if (Resultado.Verified == true)
+                    {
+                        verificationControl1.Enabled = false;
+                        verificationControl1.Active = false;
+                        this.Hide();
+                        Cls_Libreria.Mensajesistema = "Bienvenid@ al sistema " + " " + user;
+                        FormInformation fw = new FormInformation();
+                        fw.Show();
+                        fw.CaragarDatos();                       
+                        MenuPrincipal xMenuPrincipal = new MenuPrincipal();
+                        xMenuPrincipal.Show();
+                        encontro = true;
+                        Users objeto = new Users();
+                    }
+                }
+                if (encontro == false)
+                {
+                    Filtro fil = new Filtro();
+                    fil.Show();
+                    MessageBox.Show("La Huella no existe desea registrarse", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    fil.Close();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error del sistema " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+            }
+            //verificationControl1.Active = false;
+            //Resultado.Verified = false;
+            templateDB = null;
+            return;
+        }
+        private void button2_Click(object sender, EventArgs e)
+        {
+            verificationControl1.Active = false;
+            RegistroHuellaSuper reg = new RegistroHuellaSuper();
+            reg.Show();
         }
     }
 }

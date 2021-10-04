@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FirmasPeriodicas.CapaPD;
 using FirmasPeriodicas.Helper;
+using System.Drawing.Printing;
+using QRCoder;
 
 
 namespace FirmasPeriodicas.Msm_Forms
@@ -42,39 +44,34 @@ namespace FirmasPeriodicas.Msm_Forms
                 MessageBox.Show("Error del sistema"+ ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
+        string imge = @"\logo_negro.png";
+        private void Imprimir(object sender, PrintPageEventArgs e)
         {
-         
-         
+            string Nombre = "NOMBRE: " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson;
+            string coode = Nombre + " " + "FECHA: " + DateTime.Now;
+            QRCodeGenerator qr = new QRCodeGenerator();
+            QRCodeData data = qr.CreateQrCode(coode, QRCodeGenerator.ECCLevel.Q);
+            QRCode code = new QRCode(data);
+            Font font = new Font("Ticketing", 12, FontStyle.Regular, GraphicsUnit.Point);
+            int width = 200;
+            int y = 20;
+            Image img = Image.FromFile(imge);
+            e.Graphics.DrawImage(img, new RectangleF(10, y += 10, 170, 50));
+            e.Graphics.DrawString("FIRMA REGISTRADA EL DÍA: " + DateTime.Now.ToString("dddd, dd MMM yyyy HH:mm").ToUpper(), font, Brushes.Black, new RectangleF(0, y += 60, width, 60));
+            e.Graphics.DrawString(Nombre, font, Brushes.Black, new RectangleF(0, y += 60, width, 60));
+            e.Graphics.DrawString("_________________________", font, Brushes.Black, new RectangleF(0, y += 70, width, 50));
+            e.Graphics.DrawString(" " + " " + " FIRMA DE SUPERVISOR", font, Brushes.Black, new RectangleF(0, y += 20, width, 50));
+            e.Graphics.DrawImage(code.GetGraphic(5), new RectangleF(5, y += 20, 170, 170));
         }
-
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void rjButton1_Click(object sender, EventArgs e)
         {
+            printDocument1 = new PrintDocument();
+            PrinterSettings ps = new PrinterSettings();
+            printDocument1.PrinterSettings = ps;
+            printDocument1.PrintPage += Imprimir;
+            printDocument1.Print();
             this.Close();
         }
-
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void FormAsistencia_Load(object sender, EventArgs e)
-        {
-
-        }
-
         private void rjButton1_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Enter)

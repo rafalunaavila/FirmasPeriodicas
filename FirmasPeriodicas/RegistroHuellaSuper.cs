@@ -85,8 +85,7 @@ namespace FirmasPeriodicas
         private void btn_Salir_Click(object sender, EventArgs e)
         {
             this.Close();
-            Login log = new Login();
-            log.Show();
+            
         }
 
         private void panel1_MouseMove(object sender, MouseEventArgs e)

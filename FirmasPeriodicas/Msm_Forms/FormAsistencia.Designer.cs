@@ -40,6 +40,7 @@
             this.rjButton2 = new CustomControls.RJControls.RJButton();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.printDocument1 = new System.Drawing.Printing.PrintDocument();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
@@ -57,7 +58,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // label1
             // 
@@ -66,11 +66,10 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
             this.label1.Location = new System.Drawing.Point(69, 248);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(153, 38);
+            this.label1.Size = new System.Drawing.Size(145, 38);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Asistencia maracada \r\ncon exito";
+            this.label1.Text = "Asistencia marcada \r\ncon éxito";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // pictureBox2
             // 
@@ -92,7 +91,6 @@
             this.lbl_nombre.Size = new System.Drawing.Size(60, 19);
             this.lbl_nombre.TabIndex = 4;
             this.lbl_nombre.Text = "Nombre";
-            this.lbl_nombre.Click += new System.EventHandler(this.label2_Click);
             // 
             // rjButton1
             // 
@@ -175,7 +173,6 @@
             this.Name = "FormAsistencia";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CerrarPrograma";
-            this.Load += new System.EventHandler(this.FormAsistencia_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
@@ -195,5 +192,6 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Drawing.Printing.PrintDocument printDocument1;
     }
 }

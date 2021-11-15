@@ -57,7 +57,7 @@
             this.rjButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton2.Font = new System.Drawing.Font("Coolvetica Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rjButton2.ForeColor = System.Drawing.Color.Black;
-            this.rjButton2.Location = new System.Drawing.Point(117, 131);
+            this.rjButton2.Location = new System.Drawing.Point(167, 131);
             this.rjButton2.Name = "rjButton2";
             this.rjButton2.Size = new System.Drawing.Size(150, 40);
             this.rjButton2.TabIndex = 11;
@@ -98,9 +98,9 @@
             this.rjButton1.FlatAppearance.BorderSize = 0;
             this.rjButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton1.ForeColor = System.Drawing.Color.White;
-            this.rjButton1.Location = new System.Drawing.Point(6, 6);
+            this.rjButton1.Location = new System.Drawing.Point(10, 6);
             this.rjButton1.Name = "rjButton1";
-            this.rjButton1.Size = new System.Drawing.Size(355, 177);
+            this.rjButton1.Size = new System.Drawing.Size(427, 177);
             this.rjButton1.TabIndex = 8;
             this.rjButton1.TextColor = System.Drawing.Color.White;
             this.rjButton1.UseVisualStyleBackColor = false;
@@ -110,7 +110,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 20.25F);
-            this.label2.Location = new System.Drawing.Point(101, 14);
+            this.label2.Location = new System.Drawing.Point(149, 14);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 32);
             this.label2.TabIndex = 12;
@@ -143,7 +143,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(367, 189);
+            this.ClientSize = new System.Drawing.Size(447, 189);
             this.Controls.Add(this.lbl_Danger3);
             this.Controls.Add(this.lbl_Danger2);
             this.Controls.Add(this.label2);

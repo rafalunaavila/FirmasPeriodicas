@@ -172,7 +172,7 @@ namespace FirmasPeriodicas
             string MaternoPersona = "";
             sbyte Candado;
             string Supervisor = "";
-     
+            string Mensaje = "";
 
             try
             {
@@ -191,8 +191,12 @@ namespace FirmasPeriodicas
                     PaternoPersona = Convert.ToString(xitem["Paterno"]);
                     MaternoPersona = Convert.ToString(xitem["Materno"]);
                     Supervisor = Convert.ToString(xitem["Supervisor"]);
+                    Mensaje = Convert.ToString(xitem["MotivoCandado"]);
 
-                    Cls_Libreria.Mensajesistema = "No puedes registrar su firma";
+
+
+
+                    Cls_Libreria.Mensajesistema = "No puedes registrar su firma ("+ Mensaje +")";
                     Cls_Libreria.Mensajesistema2 = "Solicite a su supervisor";
                     Cls_Libreria.Mensajesistema3 = Supervisor;
 
@@ -395,7 +399,7 @@ namespace FirmasPeriodicas
             }
             else
             {
-                verificationControl2.Active = false;
+                verificationControl2.Active = false;     
                 var lsv = lsv_PerosnasHuella.SelectedItems[0];
                 string idpersona = lsv_PerosnasHuella.SelectedItems[0].Text;
                 fil.Show();
@@ -443,23 +447,27 @@ namespace FirmasPeriodicas
                 verificationControl2.Active = false;
                 verificationControl1.Active = false;
             }
-          if ((e.TabPageIndex == 2)||(e.TabPageIndex == 4))
+          if (e.TabPageIndex == 2)
             {
                 verificationControl2.Active = true;
                 verificationControl1.Active = true;
                 dateTimePicker1.Value = DateTime.Now;                
           }
-          if (e.TabPageIndex == 4)
+            if (e.TabPageIndex == 3)
             {
+                verificationControl1.Active = false;
                 verificationControl2.Active = false;
                 pictureBox12.Hide();
-                
+            }
+          if (e.TabPageIndex == 4)
+            {
+                verificationControl1.Active = true;     
           }
           if (e.TabPageIndex != 4)
             {
                 lbl_nombre.Text = "";
                 lbl_Supervisor.Text = "";
-          }   
+          } 
           
         }
 
@@ -542,6 +550,7 @@ namespace FirmasPeriodicas
                 }
                 if (encontro == false)
                 {
+                    verificationControl1.Enabled = false;
                     Filtro fil = new Filtro();
                     fil.Show();
                     DialogResult dialogResult = MessageBox.Show("La Huella no existe desea registrarse", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);

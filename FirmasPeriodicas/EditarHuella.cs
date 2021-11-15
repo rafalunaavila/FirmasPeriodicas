@@ -22,7 +22,7 @@ namespace FirmasPeriodicas
     {
         public EditarHuella()
         {
-           
+      
             InitializeComponent();
         }
 
@@ -77,6 +77,7 @@ namespace FirmasPeriodicas
 
         private void btn_Salir_Click(object sender, EventArgs e)
         {
+            enrollmentControl1.Enabled = false;
             this.Tag = "";
             this.Close();
         }

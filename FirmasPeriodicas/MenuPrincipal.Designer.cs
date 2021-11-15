@@ -79,6 +79,7 @@ namespace FirmasPeriodicas
             this.lsv_PerosnasHuella = new System.Windows.Forms.ListView();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.tabPage5 = new System.Windows.Forms.TabPage();
+            this.pictureBox13 = new System.Windows.Forms.PictureBox();
             this.lbl_Supervisor = new System.Windows.Forms.Label();
             this.lbl_nombre = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
@@ -95,7 +96,6 @@ namespace FirmasPeriodicas
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.printDialog1 = new System.Windows.Forms.PrintDialog();
-            this.pictureBox13 = new System.Windows.Forms.PictureBox();
             button3 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
@@ -112,12 +112,12 @@ namespace FirmasPeriodicas
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.tabPage5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).BeginInit();
             this.SuspendLayout();
             // 
             // button3
@@ -672,6 +672,16 @@ namespace FirmasPeriodicas
             this.tabPage5.Text = "Verificación ";
             this.tabPage5.UseVisualStyleBackColor = true;
             // 
+            // pictureBox13
+            // 
+            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
+            this.pictureBox13.Location = new System.Drawing.Point(4, 292);
+            this.pictureBox13.Name = "pictureBox13";
+            this.pictureBox13.Size = new System.Drawing.Size(156, 47);
+            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox13.TabIndex = 32;
+            this.pictureBox13.TabStop = false;
+            // 
             // lbl_Supervisor
             // 
             this.lbl_Supervisor.AutoSize = true;
@@ -714,6 +724,7 @@ namespace FirmasPeriodicas
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Coolvetica Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
             this.label3.Location = new System.Drawing.Point(8, 12);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(193, 25);
@@ -838,16 +849,6 @@ namespace FirmasPeriodicas
             // 
             this.printDialog1.UseEXDialog = true;
             // 
-            // pictureBox13
-            // 
-            this.pictureBox13.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox13.Image")));
-            this.pictureBox13.Location = new System.Drawing.Point(4, 292);
-            this.pictureBox13.Name = "pictureBox13";
-            this.pictureBox13.Size = new System.Drawing.Size(156, 47);
-            this.pictureBox13.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox13.TabIndex = 32;
-            this.pictureBox13.TabStop = false;
-            // 
             // MenuPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -881,13 +882,13 @@ namespace FirmasPeriodicas
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.tabPage5.ResumeLayout(false);
             this.tabPage5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox13)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -196,7 +196,8 @@ namespace FirmasPeriodicas
 
 
 
-                    Cls_Libreria.Mensajesistema = "No puedes registrar su firma ("+ Mensaje +")";
+                    Cls_Libreria.Mensajesistema = "No puedes registrar su firma";
+                    Cls_Libreria.Mensajesistema1 = "("+Mensaje+")";
                     Cls_Libreria.Mensajesistema2 = "Solicite a su supervisor";
                     Cls_Libreria.Mensajesistema3 = Supervisor;
 

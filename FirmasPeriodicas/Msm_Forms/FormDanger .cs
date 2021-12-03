@@ -22,6 +22,7 @@ namespace FirmasPeriodicas.Msm_Forms
             try
             {
                 lbl_Danger.Text = Cls_Libreria.Mensajesistema;
+                lbl_Danger4.Text = Cls_Libreria.Mensajesistema1;
                 lbl_Danger2.Text = Cls_Libreria.Mensajesistema2;
                 lbl_Danger3.Text = Cls_Libreria.Mensajesistema3;
             }
@@ -34,6 +35,16 @@ namespace FirmasPeriodicas.Msm_Forms
         private void rjButton2_Click(object sender, EventArgs e)
         {
             this.Close();
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
 
         }
     }

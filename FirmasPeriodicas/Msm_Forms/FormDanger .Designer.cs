@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lbl_Danger2 = new System.Windows.Forms.Label();
             this.lbl_Danger3 = new System.Windows.Forms.Label();
+            this.lbl_Danger4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,7 +58,7 @@
             this.rjButton2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton2.Font = new System.Drawing.Font("Coolvetica Rg", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rjButton2.ForeColor = System.Drawing.Color.Black;
-            this.rjButton2.Location = new System.Drawing.Point(167, 131);
+            this.rjButton2.Location = new System.Drawing.Point(187, 196);
             this.rjButton2.Name = "rjButton2";
             this.rjButton2.Size = new System.Drawing.Size(150, 40);
             this.rjButton2.TabIndex = 11;
@@ -71,21 +72,23 @@
             this.lbl_Danger.AutoSize = true;
             this.lbl_Danger.BackColor = System.Drawing.Color.White;
             this.lbl_Danger.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Danger.Location = new System.Drawing.Point(79, 47);
+            this.lbl_Danger.Location = new System.Drawing.Point(98, 50);
             this.lbl_Danger.Name = "lbl_Danger";
-            this.lbl_Danger.Size = new System.Drawing.Size(0, 25);
+            this.lbl_Danger.Size = new System.Drawing.Size(27, 25);
             this.lbl_Danger.TabIndex = 10;
+            this.lbl_Danger.Text = "M1";
             // 
             // pictureBox1
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(25, 64);
+            this.pictureBox1.Location = new System.Drawing.Point(23, 85);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(48, 50);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
             // 
             // rjButton1
             // 
@@ -98,9 +101,9 @@
             this.rjButton1.FlatAppearance.BorderSize = 0;
             this.rjButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rjButton1.ForeColor = System.Drawing.Color.White;
-            this.rjButton1.Location = new System.Drawing.Point(10, 6);
+            this.rjButton1.Location = new System.Drawing.Point(2, 2);
             this.rjButton1.Name = "rjButton1";
-            this.rjButton1.Size = new System.Drawing.Size(427, 177);
+            this.rjButton1.Size = new System.Drawing.Size(511, 242);
             this.rjButton1.TabIndex = 8;
             this.rjButton1.TextColor = System.Drawing.Color.White;
             this.rjButton1.UseVisualStyleBackColor = false;
@@ -110,7 +113,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.White;
             this.label2.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 20.25F);
-            this.label2.Location = new System.Drawing.Point(149, 14);
+            this.label2.Location = new System.Drawing.Point(158, 13);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(179, 32);
             this.label2.TabIndex = 12;
@@ -122,10 +125,11 @@
             this.lbl_Danger2.BackColor = System.Drawing.Color.White;
             this.lbl_Danger2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.lbl_Danger2.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Danger2.Location = new System.Drawing.Point(79, 72);
+            this.lbl_Danger2.Location = new System.Drawing.Point(98, 111);
             this.lbl_Danger2.Name = "lbl_Danger2";
-            this.lbl_Danger2.Size = new System.Drawing.Size(0, 25);
+            this.lbl_Danger2.Size = new System.Drawing.Size(30, 25);
             this.lbl_Danger2.TabIndex = 13;
+            this.lbl_Danger2.Text = "M2";
             // 
             // lbl_Danger3
             // 
@@ -133,17 +137,31 @@
             this.lbl_Danger3.BackColor = System.Drawing.Color.White;
             this.lbl_Danger3.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.lbl_Danger3.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_Danger3.Location = new System.Drawing.Point(79, 97);
+            this.lbl_Danger3.Location = new System.Drawing.Point(98, 145);
             this.lbl_Danger3.Name = "lbl_Danger3";
-            this.lbl_Danger3.Size = new System.Drawing.Size(0, 25);
+            this.lbl_Danger3.Size = new System.Drawing.Size(30, 25);
             this.lbl_Danger3.TabIndex = 14;
+            this.lbl_Danger3.Text = "M3";
+            // 
+            // lbl_Danger4
+            // 
+            this.lbl_Danger4.AutoSize = true;
+            this.lbl_Danger4.BackColor = System.Drawing.Color.White;
+            this.lbl_Danger4.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.lbl_Danger4.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_Danger4.Location = new System.Drawing.Point(98, 79);
+            this.lbl_Danger4.Name = "lbl_Danger4";
+            this.lbl_Danger4.Size = new System.Drawing.Size(31, 25);
+            this.lbl_Danger4.TabIndex = 15;
+            this.lbl_Danger4.Text = "M4";
             // 
             // FormDanger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(447, 189);
+            this.ClientSize = new System.Drawing.Size(517, 248);
+            this.Controls.Add(this.lbl_Danger4);
             this.Controls.Add(this.lbl_Danger3);
             this.Controls.Add(this.lbl_Danger2);
             this.Controls.Add(this.label2);
@@ -172,5 +190,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lbl_Danger2;
         private System.Windows.Forms.Label lbl_Danger3;
+        private System.Windows.Forms.Label lbl_Danger4;
     }
 }

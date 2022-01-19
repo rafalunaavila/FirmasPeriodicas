@@ -48,14 +48,12 @@ namespace FirmasPeriodicas
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.lbl_nombrep = new System.Windows.Forms.Label();
+            this.txt_nombreP = new System.Windows.Forms.Label();
+            this.txt_nom = new System.Windows.Forms.TextBox();
             this.enrollmentControl1 = new DPFP.Gui.Enrollment.EnrollmentControl();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.lbl_id = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.lblnombre = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.verificationControl2 = new DPFP.Gui.Verification.VerificationControl();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -307,14 +305,12 @@ namespace FirmasPeriodicas
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
-            this.tabPage2.Controls.Add(this.lbl_nombrep);
+            this.tabPage2.Controls.Add(this.txt_nombreP);
+            this.tabPage2.Controls.Add(this.txt_nom);
             this.tabPage2.Controls.Add(this.enrollmentControl1);
             this.tabPage2.Controls.Add(this.pictureBox8);
             this.tabPage2.Controls.Add(this.pictureBox5);
-            this.tabPage2.Controls.Add(this.lbl_id);
-            this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.lblnombre);
-            this.tabPage2.Controls.Add(this.comboBox1);
             this.tabPage2.ForeColor = System.Drawing.Color.Transparent;
             this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
@@ -323,15 +319,26 @@ namespace FirmasPeriodicas
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Registro";
             // 
-            // lbl_nombrep
+            // txt_nombreP
             // 
-            this.lbl_nombrep.AutoSize = true;
-            this.lbl_nombrep.Font = new System.Drawing.Font("Coolvetica Rg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_nombrep.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
-            this.lbl_nombrep.Location = new System.Drawing.Point(8, 164);
-            this.lbl_nombrep.Name = "lbl_nombrep";
-            this.lbl_nombrep.Size = new System.Drawing.Size(0, 22);
-            this.lbl_nombrep.TabIndex = 19;
+            this.txt_nombreP.AutoSize = true;
+            this.txt_nombreP.BackColor = System.Drawing.Color.White;
+            this.txt_nombreP.Font = new System.Drawing.Font("Coolvetica Rg", 14.25F);
+            this.txt_nombreP.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
+            this.txt_nombreP.Location = new System.Drawing.Point(12, 91);
+            this.txt_nombreP.Name = "txt_nombreP";
+            this.txt_nombreP.Size = new System.Drawing.Size(154, 22);
+            this.txt_nombreP.TabIndex = 21;
+            this.txt_nombreP.Text = "Nombre Completo";
+            // 
+            // txt_nom
+            // 
+            this.txt_nom.Location = new System.Drawing.Point(13, 52);
+            this.txt_nom.Name = "txt_nom";
+            this.txt_nom.Size = new System.Drawing.Size(159, 23);
+            this.txt_nom.TabIndex = 20;
+            this.txt_nom.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txt_nom_KeyDown);
+            this.txt_nom.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_nom_KeyPress);
             // 
             // enrollmentControl1
             // 
@@ -372,48 +379,16 @@ namespace FirmasPeriodicas
             this.pictureBox5.TabIndex = 17;
             this.pictureBox5.TabStop = false;
             // 
-            // lbl_id
-            // 
-            this.lbl_id.AutoSize = true;
-            this.lbl_id.Font = new System.Drawing.Font("Coolvetica Rg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbl_id.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
-            this.lbl_id.Location = new System.Drawing.Point(107, 115);
-            this.lbl_id.Name = "lbl_id";
-            this.lbl_id.Size = new System.Drawing.Size(26, 22);
-            this.lbl_id.TabIndex = 16;
-            this.lbl_id.Text = "ID";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Coolvetica Rg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
-            this.label2.Location = new System.Drawing.Point(8, 115);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(93, 22);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Id Persona";
-            // 
             // lblnombre
             // 
             this.lblnombre.AutoSize = true;
             this.lblnombre.Font = new System.Drawing.Font("Coolvetica Rg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblnombre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
-            this.lblnombre.Location = new System.Drawing.Point(6, 18);
+            this.lblnombre.Location = new System.Drawing.Point(8, 18);
             this.lblnombre.Name = "lblnombre";
-            this.lblnombre.Size = new System.Drawing.Size(164, 22);
+            this.lblnombre.Size = new System.Drawing.Size(120, 22);
             this.lblnombre.TabIndex = 13;
-            this.lblnombre.Text = "Nombre de persona";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(10, 43);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(201, 23);
-            this.comboBox1.TabIndex = 12;
-            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
+            this.lblnombre.Text = "ID de Persona";
             // 
             // tabPage3
             // 
@@ -906,7 +881,6 @@ namespace FirmasPeriodicas
         private System.Windows.Forms.TabPage tabPage4;
         private DPFP.Gui.Enrollment.EnrollmentControl enrollmentControl1;
         private System.Windows.Forms.Label lblnombre;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ListBox ListEvents;
         private System.Windows.Forms.Button btn_Salir;
         private System.Windows.Forms.ListView lsv_PerosnasHuella;
@@ -952,10 +926,9 @@ namespace FirmasPeriodicas
         private Label lbl_Supervisor;
         private Label lbl_nombre;
         private Label label17;
-        private Label lbl_nombrep;
-        private Label lbl_id;
-        private Label label2;
         private PrintDialog printDialog1;
         private PictureBox pictureBox13;
+        private TextBox txt_nom;
+        private Label txt_nombreP;
     }
 }

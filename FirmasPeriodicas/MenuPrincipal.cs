@@ -25,16 +25,65 @@ namespace FirmasPeriodicas
             lbl_nomUser.Text = Cls_Libreria.NombreUsuario;
         }
 
-        DBUsuario dbuser = new DBUsuario();
-        private void mostrarComboVox()
+        //NUEVO METODO PARA SELECIONAR ID PERSONA
+        private void BusacarIDPersona()
         {
-            dbuser.llenarCombo(comboBox1);
+            Users obj = new Users();
+            DataTable table = new DataTable();
+            
+            int totalFilas = 0;
+            string nombre, apellidoP, apellidoM, nomCompleto;
+            String id;
+            id = txt_nom.Text.Trim();
+            if (obj.Verificar_id(id) == true)
+            {
+                table = obj.mostarUsers(id);
+                totalFilas = table.Rows.Count;
+                if (table.Rows.Count <= 0) return;
+                var datoPer = table.Rows[0];
+                foreach (DataRow xitem in table.Rows)
+                {
+                    nombre = Convert.ToString(xitem["Nombre"]);
+                    apellidoP = Convert.ToString(xitem["Paterno"]);
+                    apellidoM = Convert.ToString(xitem["Materno"]);
+
+                    Cls_Libreria.NombrePerson = nombre;
+                    Cls_Libreria.PaternoPerson = apellidoP;
+                    Cls_Libreria.MaternoPerson = apellidoM;
+                    Cls_Libreria.Foto = Convert.ToString(xitem["rutaFoto"]);
+
+                    FormRegistro fAsis = new FormRegistro();
+                    fAsis.Show();
+                    fAsis.CaragarDatos();
+
+                    txt_nombreP.Text = nombre + " " + apellidoP + " " + apellidoM;
+
+                }
+            }
+            else
+            {
+                if (txt_nom.Text == "")
+                {
+                    MessageBox.Show("Buscador vacio", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                }
+                else
+                {
+                    MessageBox.Show("La Perosna no se ecuentra en el sistema O ya esta registrada", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_nom.Text = "";
+                }
+               
+            }
+            
         }
+
+
+        DBUsuario dbuser = new DBUsuario();
+ 
 
         private void MenuPrincipal_Load(object sender, EventArgs e)
         {
-            comboBox1.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+           
             Verificar = new DPFP.Verification.Verification();
             Resultado = new DPFP.Verification.Verification.Result();
             dateTimePicker1.Value = DateTime.Now;
@@ -83,10 +132,11 @@ namespace FirmasPeriodicas
         string nomsuper = "";
         private void enrollmentControl1_OnEnroll(object Control, int FingerMask, DPFP.Template Template, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
         {
-           
-            DialogResult dialogResult = MessageBox.Show("¿Desea Regstrar a " + nombre + "?" , "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("¿Desea Regstrar a " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson + "?" , "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
             {
+                txt_nombreP.Text = Cls_Libreria.Vacioo;
+                txt_nom.Text = Cls_Libreria.Vacioo;
                 return;
             }
             else
@@ -106,9 +156,9 @@ namespace FirmasPeriodicas
                 else
                 {
                     Users objeto = new Users();
-                    if (objeto.checarRegistroPersona(lbl_id.Text.Trim()) == true)
+                    if (objeto.checarRegistroPersona(txt_nom.Text.Trim()) == true)
                     {
-                        DialogResult dialogResult2 = MessageBox.Show("El Usuario ya esta registrado¿Desea registrar su asistencia?", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        DialogResult dialogResult2 = MessageBox.Show("El Usuario ya esta registrado ¿Desea registrar su asistencia?", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dialogResult2 == DialogResult.Yes)
                         {
                             tabControl1.SelectTab(2);
@@ -117,10 +167,12 @@ namespace FirmasPeriodicas
                     else
                     {
                         Template.Serialize(ref bytes);
-                        insertUser.InsertarPRod(bytes, lbl_id.Text, nomsuper, DateTime.Now);
+                        insertUser.InsertarPRod(bytes, txt_nom.Text, nomsuper, DateTime.Now);
                         string usuario = Cls_Libreria.NombreUsuario;
                         //insertUser.InsertarPRod(bytes, lbl_id.Text, usuario);
-                        Cls_Libreria.Mensajesistema = "La persona " + nombre + " se ha registrado con exito ";
+                        Cls_Libreria.Mensajesistema = "La persona " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson + " se ha registrado con exito ";
+                        txt_nombreP.Text = Cls_Libreria.Vacioo;
+                        txt_nom.Text = Cls_Libreria.Vacioo;
                         FormInformation fw = new FormInformation();
                         fw.Show();
                         fw.CaragarDatos();
@@ -134,26 +186,8 @@ namespace FirmasPeriodicas
             }  
         }
         #endregion
-        //SACAMOS EL ID DE LA PERSONA SELECCIONADA
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int selectedIndex = comboBox1.SelectedIndex;
-            Object selectedItem = comboBox1.SelectedItem;
-            var display = comboBox1.SelectedValue.ToString();
-            lbl_id.Text = display;
-            string selected = this.comboBox1.GetItemText(this.comboBox1.SelectedItem);
-            nombre = selected;
-            Cls_Libreria.NombrePerson = nombre;
-
-            lbl_nombrep.Text = nombre;
-            enrollmentControl1.Enabled = true;
-
-            Cls_Libreria.Mensajesistema = "Se registrara a la persona: ";
-           
-        }
-
+  
         #region REGISTRO DE ASISTENCIA
-
         private DPFP.Verification.Verification Verificar;
         private DPFP.Verification.Verification.Result Resultado;
 
@@ -193,9 +227,6 @@ namespace FirmasPeriodicas
                     Supervisor = Convert.ToString(xitem["Supervisor"]);
                     Mensaje = Convert.ToString(xitem["MotivoCandado"]);
 
-
-
-
                     Cls_Libreria.Mensajesistema = "No puedes registrar su firma";
                     Cls_Libreria.Mensajesistema1 = "("+Mensaje+")";
                     Cls_Libreria.Mensajesistema2 = "Solicite a su supervisor";
@@ -206,6 +237,8 @@ namespace FirmasPeriodicas
                     Verificar.Verify(FeatureSet, templateDB, ref Resultado);
                     if (Resultado.Verified == true)
                     {
+                        Cls_Libreria.idregistro = idregistro;
+                        Cls_Libreria.idpersona = personaIdPersona;
                         Cls_Libreria.NombrePerson = nombrePersona;
                         Cls_Libreria.PaternoPerson = PaternoPersona;
                         Cls_Libreria.MaternoPerson = MaternoPersona;
@@ -230,10 +263,20 @@ namespace FirmasPeriodicas
                             }
                             else
                             {
-                                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona);
-                                FormAsistencia fAsis = new FormAsistencia();
-                                fAsis.Show();
-                                fAsis.CaragarDatos();
+                                DialogResult dialogResult = MessageBox.Show("Desea agregar un comentario?", "Informe del sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                                if (dialogResult == DialogResult.Yes)
+                                {
+                                    ComentarioFirma comentarioFirma = new ComentarioFirma();
+                                    comentarioFirma.Show();
+                                }
+                                else
+                                {
+                                    string com = null;
+                                    insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
+                                    FormAsistencia fAsis = new FormAsistencia();
+                                    fAsis.Show();
+                                    fAsis.CaragarDatos();
+                                } 
                             }
                             
                         }
@@ -444,9 +487,9 @@ namespace FirmasPeriodicas
             }
           if (e.TabPageIndex == 1)
             {
-                mostrarComboVox();
                 verificationControl2.Active = false;
                 verificationControl1.Active = false;
+                enrollmentControl1.Enabled = true;
             }
           if (e.TabPageIndex == 2)
             {
@@ -460,8 +503,9 @@ namespace FirmasPeriodicas
                 verificationControl2.Active = false;
                 pictureBox12.Hide();
             }
-          if (e.TabPageIndex == 4)
+            if (e.TabPageIndex == 4)
             {
+                verificationControl2.Active = false;
                 verificationControl1.Active = true;     
           }
           if (e.TabPageIndex != 4)
@@ -584,9 +628,26 @@ namespace FirmasPeriodicas
         {
 
         }
+
+        private void txt_nom_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+            
+                BusacarIDPersona();
+            }
+        }
+
+        private void txt_nom_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("Solo números", "Alertas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
+
+
     }
-
-
-
-
 }

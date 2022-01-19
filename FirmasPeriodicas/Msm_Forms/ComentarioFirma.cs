@@ -7,42 +7,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using FirmasPeriodicas.CapaPD;
-using FirmasPeriodicas.Helper;
 using System.Drawing.Printing;
 using QRCoder;
-
+using FirmasPeriodicas.CapaPD;
 
 namespace FirmasPeriodicas.Msm_Forms
 {
-    public partial class FormAsistencia : Form
+    public partial class ComentarioFirma : Form
     {
-        public FormAsistencia()
+        Users insertUser = new Users();
+        public ComentarioFirma()
         {
             InitializeComponent();
         }
 
-        string xFotoRuta;
-        public void CaragarDatos()
+        private void btn_close_Click(object sender, EventArgs e)
         {
             try
             {
-                label3.Text = Cls_Libreria.Fecha;
-                lbl_nombre.Text = Cls_Libreria.NombrePerson +" "+ Cls_Libreria.PaternoPerson +" "+ Cls_Libreria.MaternoPerson;
-                pictureBox1.Load(@"http://10.6.60.190/Fotos/" + Cls_Libreria.Foto);
-               // MessageBox.Show("hola"+pictureBox1.Image.Width + "largoo" + pictureBox1.Image.Height);
-                int ancho = pictureBox1.Image.Width;
-                int largo = pictureBox1.Image.Height;
-                if (ancho > largo)
-                {
-                    pictureBox1.Image.RotateFlip(RotateFlipType.Rotate90FlipY);
-                }
-
+                string com = null;
+                string personaIdPersona = Cls_Libreria.idpersona;
+                string idregistro = Cls_Libreria.idregistro;
+                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
+                FormAsistencia fAsis = new FormAsistencia();
+                fAsis.Show();
+                fAsis.CaragarDatos();
+                printDocument1 = new PrintDocument();
+                PrinterSettings ps = new PrinterSettings();
+                printDocument1.PrinterSettings = ps;
+                printDocument1.PrintPage += Imprimir;
+                printDocument1.Print();
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error del sistema"+ ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Error del sistema " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
             }
+
         }
         string imge = @"\logo_negro.png";
         private void Imprimir(object sender, PrintPageEventArgs e)
@@ -63,25 +65,31 @@ namespace FirmasPeriodicas.Msm_Forms
             e.Graphics.DrawString(" " + " " + " FIRMA DE SUPERVISOR", font, Brushes.Black, new RectangleF(0, y += 20, width, 50));
             e.Graphics.DrawImage(code.GetGraphic(5), new RectangleF(5, y += 20, 170, 170));
         }
-        private void rjButton1_Click(object sender, EventArgs e)
+
+
+        private void btn_send_Click(object sender, EventArgs e)
         {
+            try
+            {
+                string com = txtComentario.Text.ToUpper();
+                string personaIdPersona = Cls_Libreria.idpersona;
+                string idregistro = Cls_Libreria.idregistro;
+                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
+                FormAsistencia fAsis = new FormAsistencia();
+                fAsis.Show();
+                fAsis.CaragarDatos();
                 printDocument1 = new PrintDocument();
                 PrinterSettings ps = new PrinterSettings();
                 printDocument1.PrinterSettings = ps;
                 printDocument1.PrintPage += Imprimir;
                 printDocument1.Print();
                 this.Close();
-     
-        }
-        private void rjButton1_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.KeyCode == Keys.Enter)
-            this.Close();
-        }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error del sistema " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
-        private void FormAsistencia_Load(object sender, EventArgs e)
-        {
-
+            }
         }
     }
 }

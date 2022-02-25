@@ -18,7 +18,7 @@ namespace FirmasPeriodicas.Msm_Forms
             this.TopMost = true;
         }
 
-        public void CaragarDatos()
+        public void CargarDatos()
         {
             try
             {

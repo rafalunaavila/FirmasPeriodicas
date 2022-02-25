@@ -23,7 +23,7 @@ namespace FirmasPeriodicas.Msm_Forms
         }
 
         string xFotoRuta;
-        public void CaragarDatos()
+        public void CargarDatos()
         {
             try
             {
@@ -52,7 +52,7 @@ namespace FirmasPeriodicas.Msm_Forms
             QRCodeGenerator qr = new QRCodeGenerator();
             QRCodeData data = qr.CreateQrCode(coode, QRCodeGenerator.ECCLevel.Q);
             QRCode code = new QRCode(data);
-            Font font = new Font("Ticketing", 12, FontStyle.Regular, GraphicsUnit.Point);
+            Font font = new Font("Ticketing", 10, FontStyle.Regular, GraphicsUnit.Point);
             int width = 200;
             int y = 20;
             Image img = Image.FromFile(imge);

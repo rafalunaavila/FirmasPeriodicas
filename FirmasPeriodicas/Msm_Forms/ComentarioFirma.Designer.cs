@@ -73,7 +73,7 @@ namespace FirmasPeriodicas.Msm_Forms
             // 
             // txtComentario
             // 
-            this.txtComentario.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtComentario.Font = new System.Drawing.Font("Arial Narrow", 12, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtComentario.Location = new System.Drawing.Point(16, 42);
             this.txtComentario.Multiline = true;
             this.txtComentario.Name = "txtComentario";

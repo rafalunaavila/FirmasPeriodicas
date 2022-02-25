@@ -12,12 +12,13 @@ namespace FirmasPeriodicas.Msm_Forms
 {
     public partial class FormRegistro : Form
     {
+        private Timer timUpadate;
         public FormRegistro()
         {
             InitializeComponent();
         }
 
-        public void CaragarDatos()
+        public void CargarDatos()
         {
             try
             {
@@ -44,8 +45,9 @@ namespace FirmasPeriodicas.Msm_Forms
             if (dialogResult == DialogResult.No)
             {
                 Cls_Libreria.Vacioo = "";
-               
+                RegistroHuellaPersona rh = new RegistroHuellaPersona();
                 this.Close();
+                return;
             }
             else
             {

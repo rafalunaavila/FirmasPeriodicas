@@ -17,7 +17,7 @@ namespace FirmasPeriodicas.Msm_Forms
             InitializeComponent();
             this.TopMost = true;
         }
-        public void CaragarDatos()
+        public void CargarDatos()
         {
             try
             {
@@ -46,6 +46,11 @@ namespace FirmasPeriodicas.Msm_Forms
         private void pictureBox1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void lbl_Danger3_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

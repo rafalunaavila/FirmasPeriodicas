@@ -31,12 +31,7 @@ namespace FirmasPeriodicas.Msm_Forms
                 insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
                 FormAsistencia fAsis = new FormAsistencia();
                 fAsis.Show();
-                fAsis.CaragarDatos();
-                printDocument1 = new PrintDocument();
-                PrinterSettings ps = new PrinterSettings();
-                printDocument1.PrinterSettings = ps;
-                printDocument1.PrintPage += Imprimir;
-                printDocument1.Print();
+                fAsis.CargarDatos();
                 this.Close();
             }
             catch (Exception ex)
@@ -54,7 +49,7 @@ namespace FirmasPeriodicas.Msm_Forms
             QRCodeGenerator qr = new QRCodeGenerator();
             QRCodeData data = qr.CreateQrCode(coode, QRCodeGenerator.ECCLevel.Q);
             QRCode code = new QRCode(data);
-            Font font = new Font("Ticketing", 12, FontStyle.Regular, GraphicsUnit.Point);
+            Font font = new Font("Ticketing", 10, FontStyle.Regular, GraphicsUnit.Point);
             int width = 200;
             int y = 20;
             Image img = Image.FromFile(imge);
@@ -77,12 +72,7 @@ namespace FirmasPeriodicas.Msm_Forms
                 insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
                 FormAsistencia fAsis = new FormAsistencia();
                 fAsis.Show();
-                fAsis.CaragarDatos();
-                printDocument1 = new PrintDocument();
-                PrinterSettings ps = new PrinterSettings();
-                printDocument1.PrinterSettings = ps;
-                printDocument1.PrintPage += Imprimir;
-                printDocument1.Print();
+                fAsis.CargarDatos();
                 this.Close();
             }
             catch (Exception ex)

@@ -66,6 +66,8 @@ namespace FirmasPeriodicas
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripMenuItem3 = new System.Windows.Forms.ToolStripMenuItem();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txt_IdPersona = new System.Windows.Forms.TextBox();
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.btn_add = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
@@ -358,6 +360,8 @@ namespace FirmasPeriodicas
             this.enrollmentControl1.OnReaderDisconnect += new DPFP.Gui.Enrollment.EnrollmentControl._OnReaderDisconnect(this.enrollmentControl1_OnReaderDisconnect);
             this.enrollmentControl1.OnSampleQuality += new DPFP.Gui.Enrollment.EnrollmentControl._OnSampleQuality(this.enrollmentControl1_OnSampleQuality);
             this.enrollmentControl1.OnStartEnroll += new DPFP.Gui.Enrollment.EnrollmentControl._OnStartEnroll(this.enrollmentControl1_OnStartEnroll);
+            this.enrollmentControl1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.enrollmentControl1_MouseClick);
+            this.enrollmentControl1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.enrollmentControl1_MouseUp);
             // 
             // pictureBox8
             // 
@@ -446,6 +450,8 @@ namespace FirmasPeriodicas
             // 
             this.tabPage4.BackColor = System.Drawing.Color.White;
             this.tabPage4.ContextMenuStrip = this.subMenuPersona;
+            this.tabPage4.Controls.Add(this.label2);
+            this.tabPage4.Controls.Add(this.txt_IdPersona);
             this.tabPage4.Controls.Add(this.pictureBox7);
             this.tabPage4.Controls.Add(this.btn_add);
             this.tabPage4.Controls.Add(this.label9);
@@ -460,7 +466,7 @@ namespace FirmasPeriodicas
             this.tabPage4.Name = "tabPage4";
             this.tabPage4.Size = new System.Drawing.Size(792, 338);
             this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "Edición";
+            this.tabPage4.Text = "Personas Registradas ";
             this.tabPage4.Click += new System.EventHandler(this.btn_update_Click);
             // 
             // subMenuPersona
@@ -508,6 +514,29 @@ namespace FirmasPeriodicas
             this.toolStripMenuItem3.Text = "Mostrar Registros";
             this.toolStripMenuItem3.Click += new System.EventHandler(this.toolStripMenuItem3_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Coolvetica Rg", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
+            this.label2.Location = new System.Drawing.Point(610, 95);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(95, 22);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "ID Persona";
+            this.label2.Visible = false;
+            // 
+            // txt_IdPersona
+            // 
+            this.txt_IdPersona.Font = new System.Drawing.Font("Coolvetica Rg", 14.25F);
+            this.txt_IdPersona.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
+            this.txt_IdPersona.Location = new System.Drawing.Point(614, 120);
+            this.txt_IdPersona.Name = "txt_IdPersona";
+            this.txt_IdPersona.Size = new System.Drawing.Size(100, 30);
+            this.txt_IdPersona.TabIndex = 21;
+            this.txt_IdPersona.Visible = false;
+            this.txt_IdPersona.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txt_IdPersona_KeyPress);
+            // 
             // pictureBox7
             // 
             this.pictureBox7.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox7.Image")));
@@ -525,11 +554,12 @@ namespace FirmasPeriodicas
             this.btn_add.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.btn_add.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btn_add.ForeColor = System.Drawing.Color.White;
-            this.btn_add.Location = new System.Drawing.Point(596, 87);
+            this.btn_add.Location = new System.Drawing.Point(720, 106);
             this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(26, 28);
+            this.btn_add.Size = new System.Drawing.Size(39, 44);
             this.btn_add.TabIndex = 5;
             this.btn_add.UseVisualStyleBackColor = false;
+            this.btn_add.Visible = false;
             this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
             // 
             // label9
@@ -930,5 +960,7 @@ namespace FirmasPeriodicas
         private PictureBox pictureBox13;
         private TextBox txt_nom;
         private Label txt_nombreP;
+        private TextBox txt_IdPersona;
+        private Label label2;
     }
 }

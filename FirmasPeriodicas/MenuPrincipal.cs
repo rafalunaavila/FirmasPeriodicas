@@ -54,7 +54,7 @@ namespace FirmasPeriodicas
 
                     FormRegistro fAsis = new FormRegistro();
                     fAsis.Show();
-                    fAsis.CaragarDatos();
+                    fAsis.CargarDatos();
 
                     txt_nombreP.Text = nombre + " " + apellidoP + " " + apellidoM;
 
@@ -64,13 +64,14 @@ namespace FirmasPeriodicas
             {
                 if (txt_nom.Text == "")
                 {
-                    MessageBox.Show("Buscador vacio", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Buscador vacio", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 
                 }
                 else
                 {
-                    MessageBox.Show("La Perosna no se ecuentra en el sistema O ya esta registrada", "Advetrencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("La Persona no se ecuentra en el sistema O ya esta registrada", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txt_nom.Text = "";
+                    txt_nombreP.Text = "";
                 }
                
             }
@@ -132,11 +133,11 @@ namespace FirmasPeriodicas
         string nomsuper = "";
         private void enrollmentControl1_OnEnroll(object Control, int FingerMask, DPFP.Template Template, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
         {
-            DialogResult dialogResult = MessageBox.Show("¿Desea Regstrar a " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson + "?" , "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult dialogResult = MessageBox.Show("¿Desea Registrar a " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson + "?" , "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dialogResult == DialogResult.No)
             {
-                txt_nombreP.Text = Cls_Libreria.Vacioo;
-                txt_nom.Text = Cls_Libreria.Vacioo;
+                txt_nombreP.Text = "";
+                txt_nom.Text = "";
                 return;
             }
             else
@@ -149,7 +150,7 @@ namespace FirmasPeriodicas
                     Cls_Libreria.Mensajesistema = "La huella no se pudo registrar ";
                     FormWarning fw = new FormWarning();
                     fw.Show();
-                    fw.CaragarDatos();
+                    fw.CargarDatos();
                     this.Tag = "";
                     this.Close();
                 }
@@ -161,6 +162,7 @@ namespace FirmasPeriodicas
                         DialogResult dialogResult2 = MessageBox.Show("El Usuario ya esta registrado ¿Desea registrar su asistencia?", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
                         if (dialogResult2 == DialogResult.Yes)
                         {
+                            txt_nom.Text = "";
                             tabControl1.SelectTab(2);
                         }
                     }
@@ -171,11 +173,11 @@ namespace FirmasPeriodicas
                         string usuario = Cls_Libreria.NombreUsuario;
                         //insertUser.InsertarPRod(bytes, lbl_id.Text, usuario);
                         Cls_Libreria.Mensajesistema = "La persona " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson + " se ha registrado con exito ";
-                        txt_nombreP.Text = Cls_Libreria.Vacioo;
-                        txt_nom.Text = Cls_Libreria.Vacioo;
+                        txt_nombreP.Text = "";
+                        txt_nom.Text = "";
                         FormInformation fw = new FormInformation();
                         fw.Show();
-                        fw.CaragarDatos();
+                        fw.CargarDatos();
                         tabControl1.SelectTab(2);
                         enrollmentControl1.Enabled = false;
                     }
@@ -251,7 +253,7 @@ namespace FirmasPeriodicas
                         {
                             objeto = null;
                             MessageBox.Show("El usuario " + nombrePersona + " " + PaternoPersona + " " + MaternoPersona + " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
+                            return;
                         }
                         else
                         {
@@ -259,7 +261,8 @@ namespace FirmasPeriodicas
                             if (Candado == 1){
                                 FormDanger fdanger = new FormDanger();
                                 fdanger.Show();
-                                fdanger.CaragarDatos();
+                                fdanger.CargarDatos();
+                                return;
                             }
                             else
                             {
@@ -275,7 +278,7 @@ namespace FirmasPeriodicas
                                     insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
                                     FormAsistencia fAsis = new FormAsistencia();
                                     fAsis.Show();
-                                    fAsis.CaragarDatos();
+                                    fAsis.CargarDatos();
                                 } 
                             }
                             
@@ -350,7 +353,6 @@ namespace FirmasPeriodicas
                 LlenarListviewPeronasHuella(dt);
             }
         }
-
         private void LlenarListviewPeronasHuella(DataTable data)
         {
             var lis = lsv_PerosnasHuella;
@@ -473,7 +475,8 @@ namespace FirmasPeriodicas
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            tabControl1.SelectTab(1);
+            VerfificaridPersona();
+
         }
         private void button4_Click(object sender, EventArgs e)
         {
@@ -484,6 +487,11 @@ namespace FirmasPeriodicas
           if(e.TabPageIndex == 3)
             {
                 Cargar_Todo_Asistencia();
+            }
+          if(e.TabPageIndex!= 1){
+                txt_nombreP.Text = "";
+                txt_nom.Text = "";
+                Cls_Libreria.NombrePerson = "";
             }
           if (e.TabPageIndex == 1)
             {
@@ -648,6 +656,86 @@ namespace FirmasPeriodicas
             }
         }
 
+        private void enrollmentControl1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (txt_nom.Text == "")
+            {
+                MessageBox.Show("No ha sleccionado a la persona", "Advertecia del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
 
+        private void enrollmentControl1_MouseUp(object sender, MouseEventArgs e)
+        {
+            if(txt_nom.Text == "")
+            {
+                MessageBox.Show("No ha sleccionado a la persona", "Advertecia del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void VerfificaridPersona()
+        {
+            Users obj = new Users();
+            DataTable table = new DataTable();
+
+            int totalFilas = 0;
+            string nombre, apellidoP, apellidoM, nomCompleto;
+            String id;
+            id = txt_IdPersona.Text.Trim();
+            if (obj.Verificar_id(id) == true)
+            {
+                table = obj.mostarUsers(id);
+                totalFilas = table.Rows.Count;
+                if (table.Rows.Count <= 0) return;
+                var datoPer = table.Rows[0];
+                foreach (DataRow xitem in table.Rows)
+                {
+                    nombre = Convert.ToString(xitem["Nombre"]);
+                    apellidoP = Convert.ToString(xitem["Paterno"]);
+                    apellidoM = Convert.ToString(xitem["Materno"]);
+                    Cls_Libreria.idpersona = id;
+                    Cls_Libreria.NombrePerson = nombre;
+                    Cls_Libreria.PaternoPerson = apellidoP;
+                    Cls_Libreria.MaternoPerson = apellidoM;
+                    Cls_Libreria.Foto = Convert.ToString(xitem["rutaFoto"]);
+
+                    //FormRegistro fAsis = new FormRegistro();
+                    //fAsis.Show();
+                    //fAsis.CargarDatos();
+                    //txt_nombreP.Text = nombre + " " + apellidoP + " " + apellidoM;
+
+                }
+            }
+            else
+            {
+                if (txt_IdPersona.Text == "")
+                {
+                    MessageBox.Show("No ha coloacado un Id en el Recuadro", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    MessageBox.Show("La Persona no se ecuentra en el sistema O ya esta registrada", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txt_IdPersona.Text = "";
+
+                    return;
+                }
+
+            }
+
+
+            Cls_Libreria.idpersona = txt_IdPersona.Text;
+            RegistroHuellaPersona rhp = new RegistroHuellaPersona();
+
+        }
+
+        private void txt_IdPersona_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((e.KeyChar >= 32 && e.KeyChar <= 47) || (e.KeyChar >= 58 && e.KeyChar <= 255))
+            {
+                MessageBox.Show("Solo números", "Alertas", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                e.Handled = true;
+                return;
+            }
+        }
     }
 }

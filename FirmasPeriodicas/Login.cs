@@ -61,7 +61,7 @@ namespace FirmasPeriodicas
                 Cls_Libreria.Mensajesistema = "Ingresa tu Usuario";
                 FormWarning fw = new FormWarning();
                 fw.Show();
-                fw.CaragarDatos();
+                fw.CargarDatos();
                 txt_user.Focus();
                 return false;
             }
@@ -71,7 +71,7 @@ namespace FirmasPeriodicas
                 Cls_Libreria.Mensajesistema = "Ingresa tu Contraseña";
                 FormWarning fw = new FormWarning();  
                 fw.Show();
-                fw.CaragarDatos();
+                fw.CargarDatos();
                 txt_user.Focus();
                 return false;
             }
@@ -97,7 +97,7 @@ namespace FirmasPeriodicas
                 Cls_Libreria.Mensajesistema = "Bienvenid@ al sistema " +" " +usu;
                 FormInformation fw = new FormInformation();
                 fw.Show();
-                fw.CaragarDatos();
+                fw.CargarDatos();
                 MenuPrincipal xMenuPrincipal = new MenuPrincipal();
                 xMenuPrincipal.Show();
 
@@ -107,7 +107,7 @@ namespace FirmasPeriodicas
                 Cls_Libreria.Mensajesistema = "Usuario o contraseña invalidos " + usu;
                 FormWarning fw = new FormWarning();
                 fw.Show();
-                fw.CaragarDatos();
+                fw.CargarDatos();
                 txt_pass.Text = "";
                 txt_user.Text = "";
                 txt_user.Focus();
@@ -218,7 +218,7 @@ namespace FirmasPeriodicas
                         Cls_Libreria.Mensajesistema = "Bienvenid@ al sistema " + " " + user;
                         FormInformation fw = new FormInformation();
                         fw.Show();
-                        fw.CaragarDatos();                       
+                        fw.CargarDatos();                       
                         MenuPrincipal xMenuPrincipal = new MenuPrincipal();
                         xMenuPrincipal.Show();
                         encontro = true;

@@ -24,6 +24,7 @@ namespace FirmasPeriodicas
         private static string RegistroNo;
         private static string Vacio;
         private static string _Fecha;
+        private static DateTime _FechaFechaProximoContacto;
         private static bool _ok;
 
 
@@ -44,6 +45,7 @@ namespace FirmasPeriodicas
         public static string Registro_no { get => RegistroNo; set => RegistroNo = value; }
         public static string Vacioo { get => Vacio; set => Vacio = value; }
         public static string Fecha { get => _Fecha; set => _Fecha = value; }
+        public static DateTime FechaFechaProximoContacto { get => _FechaFechaProximoContacto; set => _FechaFechaProximoContacto = value; }
         public static bool ok { get => _ok; set => _ok = value; }
   
 

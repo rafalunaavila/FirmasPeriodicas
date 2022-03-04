@@ -28,7 +28,8 @@ namespace FirmasPeriodicas.Msm_Forms
                 string com = null;
                 string personaIdPersona = Cls_Libreria.idpersona;
                 string idregistro = Cls_Libreria.idregistro;
-                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
+                DateTime FechaProximoContacto = Cls_Libreria.FechaFechaProximoContacto;
+                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com, FechaProximoContacto);
                 FormAsistencia fAsis = new FormAsistencia();
                 fAsis.Show();
                 fAsis.CargarDatos();
@@ -69,7 +70,8 @@ namespace FirmasPeriodicas.Msm_Forms
                 string com = txtComentario.Text.ToUpper();
                 string personaIdPersona = Cls_Libreria.idpersona;
                 string idregistro = Cls_Libreria.idregistro;
-                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com);
+                DateTime FechaProximoContacto = Cls_Libreria.FechaFechaProximoContacto;
+                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com, FechaProximoContacto);
                 FormAsistencia fAsis = new FormAsistencia();
                 fAsis.Show();
                 fAsis.CargarDatos();

@@ -49,6 +49,7 @@ namespace FirmasPeriodicas.Msm_Forms
         {
             string Nombre = "NOMBRE: " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson;
             string coode = Nombre + " " + "FECHA: " + DateTime.Now;
+            string idregistro = Cls_Libreria.idregistro;
             QRCodeGenerator qr = new QRCodeGenerator();
             QRCodeData data = qr.CreateQrCode(coode, QRCodeGenerator.ECCLevel.Q);
             QRCode code = new QRCode(data);

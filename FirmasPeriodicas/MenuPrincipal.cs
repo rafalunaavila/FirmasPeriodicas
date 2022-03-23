@@ -193,7 +193,12 @@ namespace FirmasPeriodicas
         private DPFP.Verification.Verification Verificar;
         private DPFP.Verification.Verification.Result Resultado;
 
-        string xFotoRuta;
+   
+        string personaIdPersona = "", idregistro = "", nombrePersona = "", PaternoPersona = "", 
+               MaternoPersona = "", Supervisor = "", Mensaje = "", rutafoto = "", periodicidadfirma = "", 
+               EstadoSupervision = "", FechaProximoContacto = "",FechaUltimoContacto = "", idSupervision="";
+        sbyte Candado = 0;
+
         public void verificationControl2_OnComplete_1(object Control, FeatureSet FeatureSet, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
         {
             DPFP.Template templateDB = new DPFP.Template();
@@ -201,12 +206,7 @@ namespace FirmasPeriodicas
             Users obj = new Users();
             DataTable datosPersona = new DataTable();
             int totalFilas = 0;
-            string personaIdPersona = "", idregistro = "", nombrePersona = "", PaternoPersona = "", MaternoPersona = "", Supervisor = "", Mensaje = "", rutafoto = "", periodicidadfirma = "", EstadoSupervision = "";
-            string FechaProximoContacto = "";
-            string FechaUltimoContacto = "";
-            //DateTime FechaProximoContacto = DateTime.Today;
-            //DateTime FechaUltimoContacto = DateTime.Today;
-            sbyte Candado = 0;
+            int totalFilas2 = 0;
             bool encontro = false;
 
             try
@@ -220,43 +220,67 @@ namespace FirmasPeriodicas
                     fingeprintByte = (byte[])xitem["fingerPrint"];
                     idregistro = Convert.ToString(xitem["idregistroHuella"]);
                     personaIdPersona = Convert.ToString(xitem["personaIdPersona"]);
-                    nombrePersona = Convert.ToString(xitem["Nombre"]);
-                    PaternoPersona = Convert.ToString(xitem["Paterno"]);
-                    MaternoPersona = Convert.ToString(xitem["Materno"]);
-                    Supervisor = Convert.ToString(xitem["Supervisor"]);
-                    Mensaje = Convert.ToString(xitem["MotivoCandado"]);
-                    Candado = Convert.ToSByte(xitem["Candado"]);
-                    rutafoto = Convert.ToString(xitem["rutaFoto"]);
-
-                    FechaProximoContacto = Convert.ToString(xitem["FechaProximoContacto"]);
-                    FechaUltimoContacto = Convert.ToString(xitem["FechaUltimoContacto"]);
-                    periodicidadfirma = Convert.ToString(xitem["PeriodicidadFirma"]);
-                    EstadoSupervision = Convert.ToString(xitem["EstadoSupervision"]);
-
-
-                    Cls_Libreria.Mensajesistema = "No puedes registrar su firma";
-                    Cls_Libreria.Mensajesistema1 = "("+Mensaje+")";
-                    Cls_Libreria.Mensajesistema2 = "Solicite a su supervisor";
-                    Cls_Libreria.Mensajesistema3 = Supervisor;
-
                     templateDB.DeSerialize(fingeprintByte);
                     Verificar.Verify(FeatureSet, templateDB, ref Resultado);
                     if (Resultado.Verified == true)
                     {
-                        DateTime FechaProximoContactod = new DateTime();
-                        if (FechaUltimoContacto == "" || FechaUltimoContacto == null /*||(FechaUltimoContacto != "" && FechaUltimoContacto != null)*/)
+                        idregistro = idregistro;
+                        personaIdPersona = personaIdPersona;
+                        encontro = true;
+                        break;
+                    }
+                }
+
+                if (encontro == false)
+                {
+                    Filtro fil = new Filtro();
+                    fil.Show();
+                    DialogResult dialogResult = MessageBox.Show("La Huella no existe desea registrarse", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
+                    if (dialogResult == DialogResult.Yes)
+                    {
+                        tabControl1.SelectTab(0);
+                    }
+
+                    fil.Close();
+                    return;
+                }
+
+                //MessageBox.Show("persona encontrada con el id " + result, "aviso");
+                DataTable datosPersonaSupervision = new DataTable();
+                datosPersonaSupervision = obj.personaSupervsion(personaIdPersona);
+                totalFilas2 = datosPersonaSupervision.Rows.Count;
+                if (datosPersonaSupervision.Rows.Count <= 0) return;
+                var datoPerSuper = datosPersonaSupervision.Rows[0];
+                foreach (DataRow xitem in datosPersonaSupervision.Rows)
+                {
+                    EstadoSupervision = Convert.ToString(xitem["EstadoSupervision"]);
+                    if (EstadoSupervision != "CONCLUIDO" && EstadoSupervision != "Concluido")
+                    {
+                        FechaProximoContacto = Convert.ToString(xitem["FechaProximoContacto"]);
+                        FechaUltimoContacto = Convert.ToString(xitem["FechaUltimoContacto"]);
+                        periodicidadfirma = Convert.ToString(xitem["PeriodicidadFirma"]);
+                        idSupervision = Convert.ToString(xitem["idSupervision"]);                       
+                        nombrePersona = Convert.ToString(xitem["Nombre"]);
+                        PaternoPersona = Convert.ToString(xitem["Paterno"]);
+                        MaternoPersona = Convert.ToString(xitem["Materno"]);
+                        Supervisor = Convert.ToString(xitem["Supervisor"]);
+                        Mensaje = Convert.ToString(xitem["MotivoCandado"]);
+                        Candado = Convert.ToSByte(xitem["Candado"]);
+                        rutafoto = Convert.ToString(xitem["rutaFoto"]);
+
+                        if(idSupervision != "")
                         {
-
-                            if (FechaProximoContacto == "" && FechaProximoContacto == null)
+                            DateTime FechaProximoContactod = new DateTime();
+                            if (FechaUltimoContacto == "" || FechaUltimoContacto == null /*&& (FechaProximoContacto != "" || FechaProximoContacto != null)*/)
                             {
 
-                                FechaProximoContacto = FechaUltimoContacto;
 
-                            }
-                            //DateTime FechaUltimoContactod = Convert.ToDateTime(FechaUltimoContacto);
+                                if (FechaProximoContacto == "" && FechaProximoContacto == null)
+                                {
+                                    FechaProximoContacto = FechaUltimoContacto;
+                                }
 
-                            if (EstadoSupervision != "CONCLUIDO")
-                            {
+
                                 if (periodicidadfirma != null && FechaProximoContacto != "" && FechaProximoContacto != null)
                                 {
                                     FechaProximoContactod = Convert.ToDateTime(FechaProximoContacto);
@@ -287,29 +311,23 @@ namespace FirmasPeriodicas
                                             FechaProximoContactod = FechaProximoContactod.AddYears(1);
                                             break;
                                         default:
-                                            MessageBox.Show("NO TIENE PERIODICIDADA DE FIRMA, NO SE GUARDARA LA PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            MessageBox.Show("NO TIENE PERIODICIDADA DE FIRMA, NO SE GUARDARA EL PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             break;
                                     }
-                                   
                                 }
-              
+                                insertUser.InsertarFPC(idSupervision, FechaProximoContactod);
                             }
                             else
                             {
-                                MessageBox.Show("LA PERSONA TIENE UN ESTADO DE SUPERVISION DE CONCLUIDO, NO SE GUARDARA LA PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                            
+                                DateTime FechaUltimoContactod = Convert.ToDateTime(FechaUltimoContacto);
+                                if (FechaProximoContacto == "" && FechaProximoContacto == null)
+                                {
+                                    FechaProximoContacto = FechaUltimoContacto;
+                                }
 
-                        }
-                        else
-                        {
-                            DateTime FechaUltimoContactod = Convert.ToDateTime(FechaUltimoContacto);
-                            FechaProximoContactod = Convert.ToDateTime(FechaProximoContacto);
-
-                            if (EstadoSupervision != "CONCLUIDO")
-                            {
                                 if (periodicidadfirma != null)
                                 {
+                                    FechaProximoContactod = Convert.ToDateTime(FechaUltimoContacto);
                                     switch (periodicidadfirma)
                                     {
                                         case "DIARIA":
@@ -334,96 +352,71 @@ namespace FirmasPeriodicas
                                             FechaProximoContactod = FechaUltimoContactod.AddMonths(6);
                                             break;
                                         case "ANUAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddYears(6);
+                                            FechaProximoContactod = FechaUltimoContactod.AddYears(1);
                                             break;
                                         default:
-                                            MessageBox.Show("NO TIENE PERIODICIDADA DE FIRMA, NO SE GUARDARA LA PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                            MessageBox.Show("NO TIENE PERIODICIDADA DE FIRMA, NO SE GUARDARA EL PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             break;
                                     }
                                 }
-                                Cls_Libreria.FechaFechaProximoContacto = FechaProximoContactod;
+                                insertUser.InsertarFPC(idSupervision, FechaProximoContactod);
                             }
-                            else
-                            {
-                                MessageBox.Show("LA PERSONA TIENE UN ESTADO DE SUPERVISION DE CONCLUIDO, NO SE GUARDARA LA PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                            }
-                            Cls_Libreria.FechaFechaProximoContacto = FechaProximoContactod;
                         }
+                    }
+                }
+                Cls_Libreria.idregistro = idregistro;
+                Cls_Libreria.idpersona = personaIdPersona;
+                Cls_Libreria.NombrePerson = nombrePersona;
+                Cls_Libreria.PaternoPerson = PaternoPersona;
+                Cls_Libreria.MaternoPerson = MaternoPersona;
+                Cls_Libreria.Fecha = dateTimePicker1.Value.ToString();
+                Cls_Libreria.Foto = rutafoto;
+                
+                Users objeto = new Users();
+                if (objeto.checarRegistroAsistecia(idregistro.Trim()) == true)
+                {
+                    objeto = null;
+                    MessageBox.Show("El usuario " + nombrePersona + " " + PaternoPersona + " " + MaternoPersona + " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    return;
+                }
+                else
+                {
 
-
-
-                        // MessageBox.Show("LA PROXIMA FECAH DE FIRMA ES EL DIA " + FechaProximoContactod , "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                       
-                        Cls_Libreria.idregistro = idregistro;
-                        Cls_Libreria.idpersona = personaIdPersona;
-                        Cls_Libreria.NombrePerson = nombrePersona;
-                        Cls_Libreria.PaternoPerson = PaternoPersona;
-                        Cls_Libreria.MaternoPerson = MaternoPersona;
-                        Cls_Libreria.Fecha = dateTimePicker1.Value.ToString();
-                        Cls_Libreria.Foto = rutafoto;
-                        encontro = true;
-                        Users objeto = new Users();
-                        if (objeto.checarRegistroAsistecia(idregistro.Trim()) == true)
+                    if (Candado == 1)
+                    {
+                        FormDanger fdanger = new FormDanger();
+                        fdanger.Show();
+                        fdanger.CargarDatos();
+                        return;
+                    }
+                    else
+                    {
+                        DialogResult dialogResult = MessageBox.Show("¿Desea agregar un comentario?", "Informe del sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                        if (dialogResult == DialogResult.Yes)
                         {
-                            objeto = null;
-                            MessageBox.Show("El usuario " + nombrePersona + " " + PaternoPersona + " " + MaternoPersona + " ya marco asistencia el dia de hoy ", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            ComentarioFirma comentarioFirma = new ComentarioFirma();
+                            comentarioFirma.Show();
                             return;
                         }
                         else
                         {
 
-                            if (Candado == 1)
-                            {
-                                FormDanger fdanger = new FormDanger();
-                                fdanger.Show();
-                                fdanger.CargarDatos();
-                                return;
-                            }
-                            else
-                            {
-                                DialogResult dialogResult = MessageBox.Show("¿Desea agregar un comentario?", "Informe del sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
-                                if (dialogResult == DialogResult.Yes)
-                                {
-                                    ComentarioFirma comentarioFirma = new ComentarioFirma();
-                                    comentarioFirma.Show();
-                                    return;
-                                }
-                                else
-                                {
-
-                                    string com = null;
-                                    DateTime fecha = Cls_Libreria.FechaFechaProximoContacto; 
-                                    insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com, FechaProximoContactod);
-                                    FormAsistencia fAsis = new FormAsistencia();
-                                    fAsis.Show();
-                                    fAsis.CargarDatos();
-                                    return;
-                                }
-                            }
-
+                            string com = null;
+                            DateTime fecha = Cls_Libreria.FechaFechaProximoContacto;
+                            insertUser.InsertarRegistroPP(/*DateTime.Now, */idregistro, personaIdPersona, com);
+                            FormAsistencia fAsis = new FormAsistencia();
+                            fAsis.Show();
+                            fAsis.CargarDatos();
+                            return;
                         }
                     }
+
                 }
-
-                if (encontro == false)
-                {
-                    Filtro fil = new Filtro();
-                    fil.Show();
-                    DialogResult dialogResult = MessageBox.Show("La Huella no existe desea registrarse", "Informe del Sistema", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation);
-                    if (dialogResult == DialogResult.Yes)
-                    {
-                        tabControl1.SelectTab(0);
-                    }
-
-                    fil.Close();
-                }
-
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Error del sistema " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Error del sistema que  " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
             Resultado.Verified = false;
@@ -433,14 +426,6 @@ namespace FirmasPeriodicas
         }
         #endregion
         //PARA MOVER EL PANEL DANDO CICK EN LA PARTE SUPERIOR
-
-
-
-        private void encontrar()
-        {
-
-
-        }
         private void panel1_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

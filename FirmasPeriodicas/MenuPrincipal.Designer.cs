@@ -48,6 +48,8 @@ namespace FirmasPeriodicas
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.txt_nombreP = new System.Windows.Forms.Label();
             this.txt_nom = new System.Windows.Forms.TextBox();
             this.enrollmentControl1 = new DPFP.Gui.Enrollment.EnrollmentControl();
@@ -55,6 +57,7 @@ namespace FirmasPeriodicas
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.lblnombre = new System.Windows.Forms.Label();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.label12 = new System.Windows.Forms.Label();
             this.verificationControl2 = new DPFP.Gui.Verification.VerificationControl();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
@@ -307,6 +310,8 @@ namespace FirmasPeriodicas
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.label8);
+            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.txt_nombreP);
             this.tabPage2.Controls.Add(this.txt_nom);
             this.tabPage2.Controls.Add(this.enrollmentControl1);
@@ -320,6 +325,27 @@ namespace FirmasPeriodicas
             this.tabPage2.Size = new System.Drawing.Size(792, 338);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Registro";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Coolvetica Rg", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
+            this.label8.Location = new System.Drawing.Point(5, 209);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(301, 84);
+            this.label8.TabIndex = 23;
+            this.label8.Text = resources.GetString("label8.Text");
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(0, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(38, 16);
+            this.label7.TabIndex = 22;
+            this.label7.Text = "label7";
             // 
             // txt_nombreP
             // 
@@ -397,6 +423,7 @@ namespace FirmasPeriodicas
             // tabPage3
             // 
             this.tabPage3.BackColor = System.Drawing.Color.White;
+            this.tabPage3.Controls.Add(this.label12);
             this.tabPage3.Controls.Add(this.verificationControl2);
             this.tabPage3.Controls.Add(this.dateTimePicker1);
             this.tabPage3.Controls.Add(this.pictureBox9);
@@ -406,6 +433,18 @@ namespace FirmasPeriodicas
             this.tabPage3.Size = new System.Drawing.Size(792, 338);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Presentación";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Font = new System.Drawing.Font("Coolvetica Rg", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(50)))), ((int)(((byte)(96)))));
+            this.label12.Location = new System.Drawing.Point(3, 195);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(417, 98);
+            this.label12.TabIndex = 24;
+            this.label12.Text = resources.GetString("label12.Text");
             // 
             // verificationControl2
             // 
@@ -878,6 +917,7 @@ namespace FirmasPeriodicas
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            this.tabPage3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.tabPage4.ResumeLayout(false);
@@ -962,5 +1002,8 @@ namespace FirmasPeriodicas
         private Label txt_nombreP;
         private TextBox txt_IdPersona;
         private Label label2;
+        private Label label8;
+        private Label label7;
+        private Label label12;
     }
 }

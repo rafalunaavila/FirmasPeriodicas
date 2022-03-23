@@ -29,7 +29,7 @@ namespace FirmasPeriodicas.Msm_Forms
                 string personaIdPersona = Cls_Libreria.idpersona;
                 string idregistro = Cls_Libreria.idregistro;
                 DateTime FechaProximoContacto = Cls_Libreria.FechaFechaProximoContacto;
-                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com, FechaProximoContacto);
+                insertUser.InsertarRegistroPP(/*DateTime.Now,*/ idregistro, personaIdPersona, com);
                 FormAsistencia fAsis = new FormAsistencia();
                 fAsis.Show();
                 fAsis.CargarDatos();
@@ -45,6 +45,7 @@ namespace FirmasPeriodicas.Msm_Forms
         string imge = @"\logo_negro.png";
         private void Imprimir(object sender, PrintPageEventArgs e)
         {
+            string idregistro = Cls_Libreria.idregistro;
             string Nombre = "NOMBRE: " + Cls_Libreria.NombrePerson + " " + Cls_Libreria.PaternoPerson + " " + Cls_Libreria.MaternoPerson;
             string coode = Nombre + " " + "FECHA: " + DateTime.Now;
             QRCodeGenerator qr = new QRCodeGenerator();
@@ -55,6 +56,7 @@ namespace FirmasPeriodicas.Msm_Forms
             int y = 20;
             Image img = Image.FromFile(imge);
             e.Graphics.DrawImage(img, new RectangleF(10, y += 10, 170, 50));
+            e.Graphics.DrawString(" " + " " + " FIRMA DE SUPERVISOR", font, Brushes.Black, new RectangleF(0, y += 20, width, 50));
             e.Graphics.DrawString("FIRMA REGISTRADA EL DÍA: " + DateTime.Now.ToString("dddd, dd MMM yyyy HH:mm").ToUpper(), font, Brushes.Black, new RectangleF(0, y += 60, width, 60));
             e.Graphics.DrawString(Nombre, font, Brushes.Black, new RectangleF(0, y += 60, width, 60));
             e.Graphics.DrawString("_________________________", font, Brushes.Black, new RectangleF(0, y += 70, width, 50));
@@ -71,7 +73,7 @@ namespace FirmasPeriodicas.Msm_Forms
                 string personaIdPersona = Cls_Libreria.idpersona;
                 string idregistro = Cls_Libreria.idregistro;
                 DateTime FechaProximoContacto = Cls_Libreria.FechaFechaProximoContacto;
-                insertUser.InsertarRegistroPP(DateTime.Now, idregistro, personaIdPersona, com, FechaProximoContacto);
+                insertUser.InsertarRegistroPP(idregistro, personaIdPersona, com);
                 FormAsistencia fAsis = new FormAsistencia();
                 fAsis.Show();
                 fAsis.CargarDatos();

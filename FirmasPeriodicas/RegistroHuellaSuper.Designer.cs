@@ -100,7 +100,7 @@ namespace FirmasPeriodicas
             this.label13.BackColor = System.Drawing.Color.Transparent;
             this.label13.Font = new System.Drawing.Font("Coolvetica Condensed Rg", 32.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label13.ForeColor = System.Drawing.Color.White;
-            this.label13.Location = new System.Drawing.Point(185, 9);
+            this.label13.Location = new System.Drawing.Point(252, 3);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(287, 52);
             this.label13.TabIndex = 9;

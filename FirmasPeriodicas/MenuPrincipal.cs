@@ -193,10 +193,11 @@ namespace FirmasPeriodicas
         private DPFP.Verification.Verification Verificar;
         private DPFP.Verification.Verification.Result Resultado;
 
+        DateTime FechaUltimoContacto = DateTime.Now;
    
         string personaIdPersona = "", idregistro = "", nombrePersona = "", PaternoPersona = "", 
                MaternoPersona = "", Supervisor = "", Mensaje = "", rutafoto = "", periodicidadfirma = "", 
-               EstadoSupervision = "", FechaProximoContacto = "",FechaUltimoContacto = "", idSupervision="";
+               EstadoSupervision = "", FechaProximoContacto = "", idSupervision="";
         sbyte Candado = 0;
 
         public void verificationControl2_OnComplete_1(object Control, FeatureSet FeatureSet, ref DPFP.Gui.EventHandlerStatus EventHandlerStatus)
@@ -220,6 +221,9 @@ namespace FirmasPeriodicas
                     fingeprintByte = (byte[])xitem["fingerPrint"];
                     idregistro = Convert.ToString(xitem["idregistroHuella"]);
                     personaIdPersona = Convert.ToString(xitem["personaIdPersona"]);
+                    Supervisor = Convert.ToString(xitem["Supervisor"]);
+                    Mensaje = Convert.ToString(xitem["MotivoCandado"]);
+                    Candado = Convert.ToSByte(xitem["Candado"]);
                     templateDB.DeSerialize(fingeprintByte);
                     Verificar.Verify(FeatureSet, templateDB, ref Resultado);
                     if (Resultado.Verified == true)
@@ -245,6 +249,7 @@ namespace FirmasPeriodicas
                     return;
                 }
 
+
                 //MessageBox.Show("persona encontrada con el id " + result, "aviso");
                 DataTable datosPersonaSupervision = new DataTable();
                 datosPersonaSupervision = obj.personaSupervsion(personaIdPersona);
@@ -256,33 +261,74 @@ namespace FirmasPeriodicas
                     EstadoSupervision = Convert.ToString(xitem["EstadoSupervision"]);
                     if (EstadoSupervision != "CONCLUIDO" && EstadoSupervision != "Concluido")
                     {
-                        FechaProximoContacto = Convert.ToString(xitem["FechaProximoContacto"]);
-                        FechaUltimoContacto = Convert.ToString(xitem["FechaUltimoContacto"]);
-                        periodicidadfirma = Convert.ToString(xitem["PeriodicidadFirma"]);
                         idSupervision = Convert.ToString(xitem["idSupervision"]);                       
                         nombrePersona = Convert.ToString(xitem["Nombre"]);
                         PaternoPersona = Convert.ToString(xitem["Paterno"]);
                         MaternoPersona = Convert.ToString(xitem["Materno"]);
-                        Supervisor = Convert.ToString(xitem["Supervisor"]);
-                        Mensaje = Convert.ToString(xitem["MotivoCandado"]);
-                        Candado = Convert.ToSByte(xitem["Candado"]);
                         rutafoto = Convert.ToString(xitem["rutaFoto"]);
 
-                        if(idSupervision != "")
+                        Cls_Libreria.Mensajesistema = "No puedes registrar su firma";
+                        Cls_Libreria.Mensajesistema1 = "(" + Mensaje + ")";
+                        Cls_Libreria.Mensajesistema2 = "Solicite a su supervisor";
+                        Cls_Libreria.Mensajesistema3 = Supervisor;
+
+                        if (Candado == 1)
                         {
+                            FormDanger fdanger = new FormDanger();
+                            fdanger.Show();
+                            fdanger.CargarDatos();
+                            return;
+                        }
+
                             DateTime FechaProximoContactod = new DateTime();
-                            if (FechaUltimoContacto == "" || FechaUltimoContacto == null /*&& (FechaProximoContacto != "" || FechaProximoContacto != null)*/)
+                        if (idSupervision != "")
+                        {
+                            periodicidadfirma = Convert.ToString(xitem["PeriodicidadFirma"]);
+                            FechaProximoContacto = Convert.ToString(xitem["FechaProximoContacto"]);
+                            
+                            if (periodicidadfirma != "")
                             {
-
-
-                                if (FechaProximoContacto == "" && FechaProximoContacto == null)
+                                if (FechaProximoContacto != "")
                                 {
-                                    FechaProximoContacto = FechaUltimoContacto;
+                                    DateTime oDate = Convert.ToDateTime(FechaProximoContacto);
+                                    do
+                                    {
+                                        switch (periodicidadfirma)
+                                        {
+                                            case "DIARIA":
+                                                oDate = oDate.AddDays(1);
+                                                break;
+                                            case "SEMANAL":
+                                                oDate = oDate.AddDays(7);
+                                                break;
+                                            case "QUINCENAL":
+                                                oDate = oDate.AddDays(15);
+                                                break;
+                                            case "MENSUAL":
+                                                oDate = oDate.AddMonths(1);
+                                                break;
+                                            case "BIMESTRAL":
+                                                oDate = oDate.AddMonths(2);
+                                                break;
+                                            case "TRIMESTRAL":
+                                                oDate = oDate.AddMonths(3);
+                                                break;
+                                            case "SEMESTRAL":
+                                                oDate = oDate.AddMonths(6);
+                                                break;
+                                            case "ANUAL":
+                                                oDate = oDate.AddYears(1);
+                                                break;
+                                            default:
+                                                MessageBox.Show("NO TIENE PERIODICIDADA DE FIRMA, NO SE GUARDARA EL PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                                                break;
+                                        }
+                                    } while (oDate < DateTime.Now);
+                                    insertUser.InsertarFPC(idSupervision, FechaUltimoContacto, oDate);
                                 }
-
-
-                                if (periodicidadfirma != null && FechaProximoContacto != "" && FechaProximoContacto != null)
+                                else
                                 {
+                                    FechaProximoContacto = FechaUltimoContacto.ToString();
                                     FechaProximoContactod = Convert.ToDateTime(FechaProximoContacto);
                                     switch (periodicidadfirma)
                                     {
@@ -314,56 +360,26 @@ namespace FirmasPeriodicas
                                             MessageBox.Show("NO TIENE PERIODICIDADA DE FIRMA, NO SE GUARDARA EL PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                                             break;
                                     }
+                                insertUser.InsertarFPC(idSupervision, FechaUltimoContacto, FechaProximoContactod);
                                 }
-                                insertUser.InsertarFPC(idSupervision, FechaProximoContactod);
+                                //MessageBox.Show("FechaProximoContactod " + FechaProximoContactod.ToString() + "FechaUltimoContacto " + FechaUltimoContacto.ToString(), "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                //insertUser.InsertarFPC(idSupervision, FechaUltimoContacto, FechaProximoContactod);
                             }
                             else
                             {
-                                DateTime FechaUltimoContactod = Convert.ToDateTime(FechaUltimoContacto);
-                                if (FechaProximoContacto == "" && FechaProximoContacto == null)
-                                {
-                                    FechaProximoContacto = FechaUltimoContacto;
-                                }
-
-                                if (periodicidadfirma != null)
-                                {
-                                    FechaProximoContactod = Convert.ToDateTime(FechaUltimoContacto);
-                                    switch (periodicidadfirma)
-                                    {
-                                        case "DIARIA":
-                                            FechaProximoContactod = FechaUltimoContactod.AddDays(1);
-                                            break;
-                                        case "SEMANAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddDays(7);
-                                            break;
-                                        case "QUINCENAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddDays(15);
-                                            break;
-                                        case "MENSUAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddMonths(1);
-                                            break;
-                                        case "BIMESTRAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddMonths(2);
-                                            break;
-                                        case "TRIMESTRAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddMonths(3);
-                                            break;
-                                        case "SEMESTRAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddMonths(6);
-                                            break;
-                                        case "ANUAL":
-                                            FechaProximoContactod = FechaUltimoContactod.AddYears(1);
-                                            break;
-                                        default:
-                                            MessageBox.Show("NO TIENE PERIODICIDADA DE FIRMA, NO SE GUARDARA EL PROXIMO DE CONTACTO", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                            break;
-                                    }
-                                }
-                                insertUser.InsertarFPC(idSupervision, FechaProximoContactod);
+                                MessageBox.Show("NO SE REGISTRARA LA FECHA DE PROXIMO CONTACTO PORQUE NO TIENE PERIODICIDAD DE FIRMA","Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                                insertUser.InsertarFPC(idSupervision, FechaUltimoContacto, FechaProximoContactod);
                             }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("SIN SUPERVISION", "Informe del Sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                            return;
                         }
                     }
                 }
+    
                 Cls_Libreria.idregistro = idregistro;
                 Cls_Libreria.idpersona = personaIdPersona;
                 Cls_Libreria.NombrePerson = nombrePersona;
@@ -371,7 +387,8 @@ namespace FirmasPeriodicas
                 Cls_Libreria.MaternoPerson = MaternoPersona;
                 Cls_Libreria.Fecha = dateTimePicker1.Value.ToString();
                 Cls_Libreria.Foto = rutafoto;
-                
+             
+
                 Users objeto = new Users();
                 if (objeto.checarRegistroAsistecia(idregistro.Trim()) == true)
                 {
@@ -381,9 +398,12 @@ namespace FirmasPeriodicas
                 }
                 else
                 {
-
                     if (Candado == 1)
                     {
+                        Cls_Libreria.Mensajesistema = "No puedes registrar su firma";
+                        Cls_Libreria.Mensajesistema1 = "(" + Mensaje + ")";
+                        Cls_Libreria.Mensajesistema2 = "Solicite a su supervisor";
+                        Cls_Libreria.Mensajesistema3 = Supervisor;
                         FormDanger fdanger = new FormDanger();
                         fdanger.Show();
                         fdanger.CargarDatos();
@@ -400,23 +420,22 @@ namespace FirmasPeriodicas
                         }
                         else
                         {
-
                             string com = null;
                             DateTime fecha = Cls_Libreria.FechaFechaProximoContacto;
-                            insertUser.InsertarRegistroPP(/*DateTime.Now, */idregistro, personaIdPersona, com);
+                            insertUser.InsertarRegistroPP(idregistro, personaIdPersona, com);
                             FormAsistencia fAsis = new FormAsistencia();
                             fAsis.Show();
                             fAsis.CargarDatos();
                             return;
                         }
                     }
-
                 }
             }
 
             catch (Exception ex)
             {
-                MessageBox.Show("Error del sistema que  " + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Error del sistema " +
+                    "" + ex.Message, "Advertencia del sistema", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
 
             }
             Resultado.Verified = false;
